@@ -1,54 +1,92 @@
+/* HomePage.module.css */
+
 .homeContainer {
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-  font-family: "Segoe UI", sans-serif;
-  color: #333;
+  padding: 3rem 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #fff0f5, #e0f7fa);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .title {
-  font-size: 2.5rem;
-  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #d63384;
   margin-bottom: 1rem;
-  color: #a63d72;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .description {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 600px;
   text-align: center;
-  font-size: 1.1rem;
   margin-bottom: 2rem;
 }
 
 .infoSection,
 .scheduleSection {
-  background-color: #f9f3f7;
-  padding: 1.2rem;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
 }
 
-.infoSection ul {
-  list-style-type: disc;
+.infoSection h2,
+.scheduleSection h2 {
+  color: #009688;
+  margin-bottom: 0.75rem;
+}
+
+ul {
   padding-left: 1.5rem;
+  color: #444;
+}
+
+.scheduleSection p {
+  margin: 0.25rem 0;
+  color: #333;
 }
 
 .navLinks {
+  margin-top: 2rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  margin-top: 2rem;
 }
 
 .button {
-  background-color: #e07ea2;
+  padding: 0.75rem 1.5rem;
+  background-color: #ff69b4;
   color: white;
-  padding: 0.7rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
   text-decoration: none;
-  border-radius: 8px;
   transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
 }
 
 .button:hover {
-  background-color: #c76b90;
+  background-color: #ec407a;
+  box-shadow: 0 6px 14px rgba(255, 105, 180, 0.4);
 }
