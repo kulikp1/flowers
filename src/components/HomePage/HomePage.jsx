@@ -12,6 +12,9 @@ const HomePage = () => {
           <span className={styles.brandName}>Квітковий кошик</span>
         </div>
         <nav className={styles.nav}>
+          <Link to="/" className={styles.navLink}>
+            На головну
+          </Link>
           <Link to="/products" className={styles.navLink}>
             Каталог
           </Link>
@@ -20,6 +23,7 @@ const HomePage = () => {
           </Link>
         </nav>
       </header>
+
       <main className={styles.mainContent}>
         <div className={styles.textContent}>
           <section className={styles.infoSection}>
@@ -33,9 +37,12 @@ const HomePage = () => {
 
           <section className={styles.scheduleSection}>
             <h2>Розклад роботи</h2>
-            <p>Пн - Сб: 07:00 – 18:00</p>
-            <p>Нд: вихідний</p>
+            <p className={styles.scheduleText}>Пн - Сб: 07:00 – 18:00</p>
+            <p className={styles.scheduleText}>Нд: вихідний</p>
           </section>
+          <Link to="/products" className={styles.ctaButton}>
+            Перейти до каталогу
+          </Link>
         </div>
 
         <div className={styles.heroImage}>
