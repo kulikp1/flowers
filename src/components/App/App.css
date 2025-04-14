@@ -40,3 +40,42 @@
 .read-the-docs {
   color: #888;
 } */
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+ul,
+ol {
+  list-style: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+dl,
+dd,
+ol,
+ul,
+fieldset,
+form,
+legend,
+table,
+th,
+td,
+figure {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
