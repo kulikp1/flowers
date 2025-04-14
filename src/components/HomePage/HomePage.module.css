@@ -57,7 +57,7 @@
   display: block;
   width: 0%;
   height: 2px;
-  background: #198754;
+  background: #c2185b;
   transition: width 0.3s;
   position: absolute;
   bottom: -4px;
@@ -65,7 +65,7 @@
 }
 
 .navLink:hover {
-  color: #2e7d32;
+  color: #c2185b;
 }
 
 .navLink:hover::after {
