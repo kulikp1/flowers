@@ -1,0 +1,54 @@
+.homeContainer {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #a63d72;
+}
+
+.description {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.infoSection,
+.scheduleSection {
+  background-color: #f9f3f7;
+  padding: 1.2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.infoSection ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button {
+  background-color: #e07ea2;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #c76b90;
+}
