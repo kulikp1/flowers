@@ -1,6 +1,7 @@
 import React from "react";
 import flowers from "../../data/flowers";
 import styles from "./CatalogPage.module.css";
+import Header from "../Navigation/Navigation";
 
 const Catalog = () => {
   const handleAddToCart = (flower) => {
@@ -9,6 +10,7 @@ const Catalog = () => {
 
   return (
     <div className={styles.container}>
+      <Header />
       <h2>Каталог квітів</h2>
       <div className={styles.grid}>
         {flowers.map((flower) => (
