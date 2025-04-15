@@ -9,7 +9,7 @@ const Catalog = () => {
   };
 
   return (
-    <div className={styles.header}>
+    <div className={styles.pageContainer}>
       <Header />
       <div className={styles.container}>
         <h2 className={styles.title}>Каталог квітів</h2>
