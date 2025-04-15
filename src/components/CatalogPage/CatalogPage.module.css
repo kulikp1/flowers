@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-h2 {
+.title {
   margin-bottom: 32px;
   color: #2b2b2b;
   font-size: 32px;

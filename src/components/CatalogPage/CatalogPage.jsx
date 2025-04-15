@@ -9,10 +9,10 @@ const Catalog = () => {
   };
 
   return (
-    <div>
+    <div className={styles.header}>
       <Header />
       <div className={styles.container}>
-        <h2>Каталог квітів</h2>
+        <h2 className={styles.title}>Каталог квітів</h2>
         <div className={styles.grid}>
           {flowers.map((flower) => (
             <div key={flower.id} className={styles.card}>
