@@ -1,25 +1,83 @@
 .container {
-  padding: 20px;
+  padding: 40px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
+h2 {
+  margin-bottom: 24px;
+  color: #2b2b2b;
+  font-size: 28px;
 }
 
 .grid {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  width: 200px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  width: 220px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #1e1e1e;
+}
+
+.card p {
+  margin: 4px 0;
+  font-size: 16px;
 }
 
 .oldPrice {
   text-decoration: line-through;
-  color: gray;
+  color: #999;
+  font-size: 14px;
+}
+
+.card button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+  background-color: #e73370;
 }
 
 .cart {
-  margin-top: 40px;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 2px solid #eee;
+}
+
+.cart ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.cart li {
+  margin-bottom: 8px;
+  font-size: 16px;
 }

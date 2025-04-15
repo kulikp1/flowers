@@ -1,23 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import flowers from "../../data/flowers";
 import styles from "./CatalogPage.module.css";
 
 const Catalog = () => {
-  const [cart, setCart] = useState([]);
-
   const handleAddToCart = (flower) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === flower.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === flower.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prev, { ...flower, quantity: 1 }];
-      }
-    });
+    console.log("Додано до кошика:", flower); // тимчасово для перевірки
   };
 
   return (
@@ -39,21 +26,6 @@ const Catalog = () => {
             </button>
           </div>
         ))}
-      </div>
-
-      <div className={styles.cart}>
-        <h2>Кошик</h2>
-        {cart.length === 0 ? (
-          <p>Кошик порожній</p>
-        ) : (
-          <ul>
-            {cart.map((item) => (
-              <li key={item.id}>
-                {item.name} — {item.quantity} шт.
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
     </div>
   );
