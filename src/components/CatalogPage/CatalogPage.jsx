@@ -13,6 +13,12 @@ const Catalog = () => {
       <div className={styles.grid}>
         {flowers.map((flower) => (
           <div key={flower.id} className={styles.card}>
+            <img
+              src={flower.image}
+              alt={flower.name}
+              className={styles.image}
+            />
+
             <h3>{flower.name}</h3>
             <p>В наявності: {flower.quantity} шт.</p>
             <p>
