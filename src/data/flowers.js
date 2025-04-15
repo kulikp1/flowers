@@ -5,7 +5,7 @@ const flowers = [
     quantity: 50,
     price: 45,
     oldPrice: 55,
-    image: "https://images.unsplash.com/photo-1606925797304-5d6b3fc2c5b5"
+    image: "https://kievflower.com.ua/published/publicdata/PENTAGON/attachments/SC/products_pictures/%D0%A0%D0%BE%D0%B7%D0%B0%20%D0%BA%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B0%20%D0%93%D1%80%D0%B0%D0%BD%20%D0%BF%D1%80%D0%B8.jpg"
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const flowers = [
     quantity: 70,
     price: 30,
     oldPrice: 35,
-    image: "https://images.unsplash.com/photo-1587019155557-8e907c843b07"
+    image: "https://cdn.proflowers.ua/upload/images/product/196_0.jpg?t=1638525646"
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const flowers = [
     quantity: 30,
     price: 60,
     oldPrice: 65,
-    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36"
+    image: "https://donpion.ua/static/media/uploads/product/One_flower/pion/.thumbnails/pion-pink.jpg/pion-pink-472x472.jpg"
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const flowers = [
     quantity: 90,
     price: 25,
     oldPrice: 30,
-    image: "https://images.unsplash.com/photo-1562007901-7e3cf50c7b43"
+    image: "https://laflower.com.ua/assets/images/products/1902/600x600/yellow-gerbera.jpg"
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ const flowers = [
     quantity: 40,
     price: 50,
     oldPrice: 55,
-    image: "https://images.unsplash.com/photo-1592179909600-6e9ba3c91b4a"
+    image: "https://faial.h83.xyz/kvitoposhta/images/52c553b2-b4e42f07-7b0dcaadb209edfd.png"
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ const flowers = [
     quantity: 60,
     price: 35,
     oldPrice: 38,
-    image: "https://images.unsplash.com/photo-1615471505795-b1854ac2e03a"
+    image: "https://rozsada.com.ua/pub/img/products/m/754_1620805110.jpg?v=20200528"
   },
   {
     id: 7,
@@ -53,7 +53,7 @@ const flowers = [
     quantity: 25,
     price: 70,
     oldPrice: 80,
-    image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b"
+    image: "https://homer.com.ua/special/cache/tovary/zs/image-upload-q2kgv08t1350ekocxpl.jpg"
   },
   {
     id: 8,
@@ -61,7 +61,7 @@ const flowers = [
     quantity: 100,
     price: 20,
     oldPrice: 25,
-    image: "https://images.unsplash.com/photo-1535909339361-8b2b6afafc7b"
+    image: "https://images.prom.ua/5017916024_sonyashnik-odinarnij-58.jpg"
   }
 ];
 
