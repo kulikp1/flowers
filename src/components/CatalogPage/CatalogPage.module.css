@@ -1,0 +1,25 @@
+.container {
+  padding: 20px;
+}
+
+.grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.cart {
+  margin-top: 40px;
+}
