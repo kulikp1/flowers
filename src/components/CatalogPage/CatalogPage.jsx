@@ -4,10 +4,6 @@ import styles from "./CatalogPage.module.css";
 import Header from "../Navigation/Navigation";
 
 const Catalog = () => {
-  const handleAddToCart = (flower) => {
-    console.log("Додано до кошика:", flower); // тимчасово для перевірки
-  };
-
   return (
     <div className={styles.pageContainer}>
       <Header />
@@ -30,7 +26,8 @@ const Catalog = () => {
               {flower.oldPrice && flower.oldPrice !== flower.price && (
                 <p className={styles.oldPrice}>{flower.oldPrice} грн</p>
               )}
-              <button onClick={() => handleAddToCart(flower)}>
+              <button>
+                {/* onClick={() => handleAddToCart(flower)} */}
                 Додати до кошика
               </button>
             </div>
