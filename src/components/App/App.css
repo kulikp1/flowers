@@ -20,10 +20,7 @@ ol,
 ul,
 fieldset,
 form,
-table,
-th,
-td,
-figure {
+table {
   margin: 0;
 }
 
