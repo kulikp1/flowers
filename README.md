@@ -188,3 +188,24 @@ See all incoming orders
 Confirm/reject/partially fulfill orders
 
 Inform clients of any order issues
+
+🛠️ Getting Started
+Clone the repository:
+
+bash
+Копировать
+Редактировать
+git clone https://github.com/yourusername/flower-basket.git
+cd flower-basket
+Install dependencies:
+
+bash
+Копировать
+Редактировать
+npm install
+Run the app:
+
+bash
+Копировать
+Редактировать
+npm start
