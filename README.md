@@ -96,13 +96,11 @@ git clone https://github.com/yourusername/flower-basket.git
 cd flower-basket
 Встановіть залежності:
 
-bash
 Копировать
 Редактировать
 npm install
 Запустіть застосунок:
 
-bash
 Копировать
 Редактировать
 npm start
