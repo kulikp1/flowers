@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import flowers from "../../data/flowers";
 import styles from "./CatalogPage.module.css";
 import Header from "../Navigation/Navigation";
@@ -11,8 +12,9 @@ const Catalog = () => {
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Зберігати у localStorage при зміні cart
+  // Зберігати cart у localStorage при зміні
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -47,6 +49,30 @@ const Catalog = () => {
 
   const handleCloseCart = () => {
     setIsCartOpen(false);
+  };
+
+  const handleOrder = () => {
+    if (cart.length === 0) return;
+
+    const newOrder = {
+      id: Date.now(),
+      date: new Date().toLocaleString(),
+      items: cart,
+    };
+
+    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    localStorage.setItem(
+      "orders",
+      JSON.stringify([...existingOrders, newOrder])
+    );
+
+    // Очистити кошик
+    setCart([]);
+    localStorage.removeItem("cart");
+    setIsCartOpen(false);
+
+    // Перейти на сторінку замовлень
+    navigate("/orders");
   };
 
   return (
@@ -84,6 +110,7 @@ const Catalog = () => {
           onClose={handleCloseCart}
           onRemove={handleRemoveFromCart}
           onUpdateQuantity={handleUpdateQuantity}
+          onOrder={handleOrder} // 👉 передаємо обробник замовлення
         />
       )}
     </div>

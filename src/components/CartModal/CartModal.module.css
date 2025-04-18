@@ -130,3 +130,21 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+.orderButton {
+  margin: 20px auto 0;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+}
+
+.orderButton:hover {
+  background-color: #218838;
+}

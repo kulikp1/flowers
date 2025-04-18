@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import styles from "./CartModal.module.css";
 
-const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity }) => {
+const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
   const handleQuantityChange = (id, newQuantity) => {
     const quantity = parseInt(newQuantity, 10);
     if (!isNaN(quantity) && quantity >= 1) {
@@ -25,7 +25,6 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity }) => {
               {cart.map((item) => (
                 <li key={item.id} className={styles.cartItem}>
                   <span className={styles.itemName}>{item.name}</span>
-                  <span>{item.price * item.quantity} грн</span>
                   <input
                     type="number"
                     min="1"
@@ -35,7 +34,7 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity }) => {
                       handleQuantityChange(item.id, e.target.value)
                     }
                   />
-
+                  <span>{item.price * item.quantity} грн</span>
                   <button onClick={() => onRemove(item.id)}>×</button>
                 </li>
               ))}
@@ -44,6 +43,9 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity }) => {
               <span>Загальна сума:</span>
               <strong>{totalPrice} грн</strong>
             </div>
+            <button onClick={onOrder} className={styles.orderButton}>
+              Оформити замовлення
+            </button>
           </>
         )}
         <button onClick={onClose} className={styles.closeButton}>
