@@ -18,11 +18,22 @@ h6,
 p,
 ol,
 ul,
-table {
+table,
+input {
   margin: 0;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+input {
+  outline: none;
+  border-color: #aaa;
+  box-shadow: none;
+}
+
+input:focus {
+  border-color: #ff4081;
 }
