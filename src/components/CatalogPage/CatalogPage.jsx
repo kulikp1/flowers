@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import flowers from "../../data/flowers";
 import styles from "./CatalogPage.module.css";
 import Header from "../Navigation/Navigation";
 import CartModal from "../CartModal/CartModal";
 
 const Catalog = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  // Зберігати у localStorage при зміні cart
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const handleAddToCart = (flower) => {
     setCart((prevCart) => {
