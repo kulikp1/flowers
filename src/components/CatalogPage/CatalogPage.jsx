@@ -28,6 +28,14 @@ const Catalog = () => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
+  const handleUpdateQuantity = (id, newQuantity) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
   const handleCloseCart = () => {
     setIsCartOpen(false);
   };
@@ -66,6 +74,7 @@ const Catalog = () => {
           cart={cart}
           onClose={handleCloseCart}
           onRemove={handleRemoveFromCart}
+          onUpdateQuantity={handleUpdateQuantity}
         />
       )}
     </div>
