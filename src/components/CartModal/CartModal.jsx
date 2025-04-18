@@ -43,14 +43,13 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
               <span>Загальна сума:</span>
               <strong>{totalPrice} грн</strong>
             </div>
-            <button onClick={onOrder} className={styles.orderButton}>
-              Оформити замовлення
-            </button>
+            <div className={styles.navBtns}>
+              <button onClick={onOrder} className={styles.orderButton}>
+                Оформити замовлення
+              </button>
+            </div>
           </>
         )}
-        <button onClick={onClose} className={styles.closeButton}>
-          Закрити
-        </button>
       </div>
     </div>
   );
