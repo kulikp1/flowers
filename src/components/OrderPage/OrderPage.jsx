@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Header from "../Navigation/Navigation";
+import styles from "./OrderPage.module.css";
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
@@ -9,34 +11,29 @@ const OrdersPage = () => {
   }, []);
 
   return (
-    <div style={{ padding: "40px", maxWidth: "800px", margin: "0 auto" }}>
-      <h2>Мої замовлення</h2>
-      {orders.length === 0 ? (
-        <p>Замовлень ще немає.</p>
-      ) : (
-        orders.map((order) => (
-          <div
-            key={order.id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "12px",
-              padding: "20px",
-              marginBottom: "20px",
-              background: "#fff",
-            }}
-          >
-            <h4>Замовлення від {order.date}</h4>
-            <ul>
-              {order.items.map((item) => (
-                <li key={item.id}>
-                  {item.name} — {item.quantity} шт. —{" "}
-                  {item.price * item.quantity} грн
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      )}
+    <div className={styles.pageWrapper}>
+      <Header />
+      <div className={styles.container}>
+        <h2 className={styles.title}>Мої замовлення</h2>
+        {orders.length === 0 ? (
+          <p className={styles.empty}>Замовлень ще немає.</p>
+        ) : (
+          orders.map((order) => (
+            <div key={order.id} className={styles.orderCard}>
+              <h4 className={styles.orderDate}>Замовлення від {order.date}</h4>
+              <ul className={styles.orderList}>
+                {order.items.map((item) => (
+                  <li key={item.id} className={styles.orderItem}>
+                    <span>{item.name}</span>
+                    <span>{item.quantity} шт.</span>
+                    <span>{item.price * item.quantity} грн</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };
