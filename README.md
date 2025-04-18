@@ -77,5 +77,3 @@ Flower Basket is a lightweight React-based web application for managing flower o
    Відкрийте `http://localhost:3000` у браузері.
 
 ---
-
-Хочеш, щоб я зберіг це у файл `README.md`?
