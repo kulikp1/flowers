@@ -10,6 +10,9 @@ const OrdersPage = () => {
     setOrders(stored);
   }, []);
 
+  const calculateTotal = (items) =>
+    items.reduce((total, item) => total + item.price * item.quantity, 0);
+
   return (
     <div className={styles.pageWrapper}>
       <Header />
@@ -30,6 +33,10 @@ const OrdersPage = () => {
                   </li>
                 ))}
               </ul>
+              <div className={styles.totalSum}>
+                Загальна сума:{" "}
+                <strong>{calculateTotal(order.items)} грн</strong>
+              </div>
             </div>
           ))
         )}
