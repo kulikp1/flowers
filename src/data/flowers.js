@@ -62,33 +62,17 @@ const flowers = [
     price: 20,
     oldPrice: 25,
     image: "https://images.prom.ua/5017916024_sonyashnik-odinarnij-58.jpg"
+  }
+  {
+    id: 8,
+    name: "Соняшник",
+    quantity: 100,
+    price: 20,
+    oldPrice: 25,
+    image: "https://images.prom.ua/5017916024_sonyashnik-odinarnij-58.jpg"
   },
   {
     id: 9,
-    name: "Соняшник",
-    quantity: 100,
-    price: 20,
-    oldPrice: 25,
-    image: "https://images.prom.ua/5017916024_sonyashnik-odinarnij-58.jpg"
-  },
-  {
-    id: 10,
-    name: "Соняшник",
-    quantity: 100,
-    price: 20,
-    oldPrice: 25,
-    image: "https://images.prom.ua/5017916024_sonyashnik-odinarnij-58.jpg"
-  },
-  {
-    id: 11,
-    name: "Соняшник",
-    quantity: 100,
-    price: 20,
-    oldPrice: 25,
-    image: "https://images.prom.ua/5017916024_sonyashnik-odinarnij-58.jpg"
-  },
-  {
-    id: 12,
     name: "Соняшник",
     quantity: 100,
     price: 20,
