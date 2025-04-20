@@ -115,7 +115,12 @@ const Catalog = () => {
         ) : (
           <div className={styles.grid}>
             {flowers.map((flower) => (
-              <div key={flower.id} className={styles.card}>
+              <div
+                key={flower.id}
+                className={`${styles.card} ${
+                  flower.quantity <= 0 ? styles.disabledCard : ""
+                }`} // додаємо клас disabledCard до картки, якщо товар відсутній
+              >
                 <img
                   src={flower.image}
                   alt={flower.name}

@@ -92,3 +92,19 @@ button:disabled {
 button:disabled:hover {
   background-color: #ccc;
 }
+
+/* Додати в стилі для карток */
+.disabledCard {
+  background-color: #f5f5f5; /* Світло-сірий фон */
+  opacity: 0.6; /* Підвищує прозорість картки */
+  cursor: not-allowed; /* Вказує, що картка неактивна */
+}
+
+.disabledCard button {
+  background-color: #ccc; /* Дизейбл кнопки */
+  cursor: not-allowed; /* Блокує клік по кнопці */
+}
+
+.disabledCard button:hover {
+  background-color: #ccc; /* Відключає ефект ховера */
+}
