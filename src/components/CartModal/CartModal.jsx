@@ -116,7 +116,12 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <h2>Кошик</h2>
-        {cart.length === 0 ? (
+        {isProcessing ? (
+          <div className={styles.loaderWrapper}>
+            <div className={styles.spinner}></div>
+            <p>Оформлюємо замовлення...</p>
+          </div>
+        ) : cart.length === 0 ? (
           <p>Кошик порожній</p>
         ) : (
           <>
@@ -135,7 +140,7 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
                 className={styles.orderButton}
                 disabled={isProcessing}
               >
-                {isProcessing ? "Оформлення..." : "Оформити замовлення"}
+                Оформити замовлення
               </button>
             </div>
           </>
