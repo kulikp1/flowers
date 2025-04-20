@@ -1,20 +1,5 @@
 const flowers = [
-  {
-    id: 1,
-    name: "Троянда червона",
-    quantity: 50,
-    price: 45,
-    oldPrice: 55,
-    image: "https://kievflower.com.ua/published/publicdata/PENTAGON/attachments/SC/products_pictures/%D0%A0%D0%BE%D0%B7%D0%B0%20%D0%BA%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B0%20%D0%93%D1%80%D0%B0%D0%BD%20%D0%BF%D1%80%D0%B8.jpg"
-  },
-  {
-    id: 2,
-    name: "Тюльпан білий",
-    quantity: 70,
-    price: 30,
-    oldPrice: 35,
-    image: "https://cdn.proflowers.ua/upload/images/product/196_0.jpg?t=1638525646"
-  },
+ 
   {
     id: 3,
     name: "Півонія рожева",
