@@ -129,8 +129,13 @@ const Catalog = () => {
                 {flower.oldPrice && flower.oldPrice !== flower.price && (
                   <p className={styles.oldPrice}>{flower.oldPrice} грн</p>
                 )}
-                <button onClick={() => handleAddToCart(flower)}>
-                  Додати до кошика
+                <button
+                  onClick={() => handleAddToCart(flower)}
+                  disabled={flower.quantity <= 0}
+                >
+                  {flower.quantity <= 0
+                    ? "Немає в наявності"
+                    : "Додати до кошика"}
                 </button>
               </div>
             ))}

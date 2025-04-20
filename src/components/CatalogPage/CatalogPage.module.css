@@ -83,3 +83,12 @@
   margin-bottom: 16px;
   padding: 10px;
 }
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: #ccc;
+}
