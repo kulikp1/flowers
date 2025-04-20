@@ -37,7 +37,8 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
         const product = products.find((p) => p.id === String(cartItem.id));
         const newQty = product.quantity - cartItem.quantity;
 
-        await fetch(
+        // Оновлюємо товар на сервері
+        const updateRes = await fetch(
           `https://6804fc41ca467c15be67df54.mockapi.io/flowers/${cartItem.id}`,
           {
             method: "PUT",
@@ -50,6 +51,10 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
             }),
           }
         );
+
+        if (!updateRes.ok) {
+          throw new Error(`Не вдалося оновити товар ${product.name}`);
+        }
       }
 
       // 4. Створюємо замовлення
@@ -77,8 +82,19 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
       const newOrder = await response.json();
       console.log("Замовлення успішно створено:", newOrder);
 
-      onOrder(); // очищення кошика
-      onClose(); // закриваємо модалку
+      // 5. Оновлюємо локальний стан, щоб відобразити актуальні дані
+      // Потрібно отримати актуальний список товарів після оновлення
+      const updatedProductsRes = await fetch(
+        "https://6804fc41ca467c15be67df54.mockapi.io/flowers"
+      );
+      const updatedProducts = await updatedProductsRes.json();
+      console.log("Оновлені товари:", updatedProducts);
+
+      // Очищаємо кошик
+      onOrder();
+
+      // Закриваємо модалку
+      onClose();
     } catch (error) {
       console.error("Помилка при оформленні замовлення:", error);
       alert("Сталася помилка під час оформлення замовлення.");
