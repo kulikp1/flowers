@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 import Header from "../Navigation/Navigation";
 import styles from "./OrderPage.module.css";
 
+const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io";
+
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("orders")) || [];
-    setOrders(stored);
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch(`${API_URL}/orders`);
+        const data = await response.json();
+        setOrders(data.reverse()); // останні замовлення першими
+      } catch (error) {
+        console.error("Помилка при завантаженні замовлень:", error);
+      }
+    };
+
+    fetchOrders();
   }, []);
 
   const calculateTotal = (items) =>
@@ -35,7 +46,9 @@ const OrdersPage = () => {
               </ul>
               <div className={styles.totalSum}>
                 Загальна сума:{" "}
-                <strong>{calculateTotal(order.items)} грн</strong>
+                <strong>
+                  {order.total || calculateTotal(order.items)} грн
+                </strong>
               </div>
             </div>
           ))

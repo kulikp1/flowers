@@ -14,7 +14,6 @@ const Catalog = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const navigate = useNavigate();
 
-  // 🟡 Заміни це посилання на власне з mockapi.io
   const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io/flowers";
 
   useEffect(() => {
@@ -73,7 +72,6 @@ const Catalog = () => {
     if (cart.length === 0) return;
 
     try {
-      // Оновлюємо кількість кожної квітки на сервері
       for (let item of cart) {
         const flowerOnServer = flowers.find((f) => f.id === item.id);
         const updatedQuantity = flowerOnServer.quantity - item.quantity;
