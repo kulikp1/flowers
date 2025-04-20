@@ -109,11 +109,26 @@ const AdminFlowerForm = () => {
     }
   };
 
+  const handleDelete = async () => {
+    if (!editData) return;
+
+    try {
+      await axios.delete(
+        `https://6804fc41ca467c15be67df54.mockapi.io/flowers/${editData.id}`
+      );
+      toast.success("Квітку видалено!");
+      setIsModalOpen(false);
+      fetchFlowers();
+    } catch (error) {
+      toast.error("Помилка при видаленні квітки");
+      console.error(error);
+    }
+  };
+
   return (
     <div className={styles.pageWrapper}>
       <Header />
       <div className={styles.container}>
-        {/* Список квітів зліва */}
         <div className={styles.leftPanel}>
           <h2 className={styles.title}>Список квітів</h2>
           {flowers.map((flower) => (
@@ -135,7 +150,6 @@ const AdminFlowerForm = () => {
           ))}
         </div>
 
-        {/* Форма додавання праворуч */}
         <div className={styles.rightPanel}>
           <h2 className={styles.title}>Додати нову квітку</h2>
           <form onSubmit={handleSubmit} className={styles.formCard}>
@@ -165,7 +179,6 @@ const AdminFlowerForm = () => {
         </div>
       </div>
 
-      {/* Модальне редагування */}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
@@ -184,17 +197,15 @@ const AdminFlowerForm = () => {
                 className={styles.input}
               />
             ))}
-            <label className={styles.checkboxWrapper}>
-              <input
-                type="checkbox"
-                name="disabled"
-                checked={editData.disabled}
-                onChange={handleEditChange}
-              />
-              <span>Недоступна</span>
-            </label>
+            <label className={styles.checkboxWrapper}></label>
             <button className={styles.button} onClick={handleEditSubmit}>
               Зберегти зміни
+            </button>
+            <button
+              className={`${styles.button} ${styles.deleteButton}`}
+              onClick={handleDelete}
+            >
+              Видалити квітку
             </button>
           </div>
         )}

@@ -140,3 +140,11 @@
   margin-bottom: 20px;
   text-align: center;
 }
+.deleteButton {
+  margin-top: 12px;
+  background-color: #ff4d4f;
+}
+
+.deleteButton:hover {
+  background-color: #e64545;
+}
