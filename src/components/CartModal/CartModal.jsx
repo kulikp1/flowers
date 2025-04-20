@@ -15,13 +15,50 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
 
   const handleOrder = async () => {
     try {
+      // 1. Отримуємо всі товари з mockapi
+      const productsRes = await fetch(
+        "https://6804fc41ca467c15be67df54.mockapi.io/flowers"
+      );
+      const products = await productsRes.json();
+
+      // 2. Перевіряємо, чи достатньо товарів
+      const hasEnough = cart.every((cartItem) => {
+        const product = products.find((p) => p.id === String(cartItem.id));
+        return product && product.quantity >= cartItem.quantity;
+      });
+
+      if (!hasEnough) {
+        alert("На складі недостатньо деяких квітів для оформлення замовлення.");
+        return;
+      }
+
+      // 3. Оновлюємо кількість для кожного товару в mockapi
+      for (const cartItem of cart) {
+        const product = products.find((p) => p.id === String(cartItem.id));
+        const newQty = product.quantity - cartItem.quantity;
+
+        await fetch(
+          `https://6804fc41ca467c15be67df54.mockapi.io/flowers/${cartItem.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              quantity: newQty,
+              disabled: newQty <= 0,
+            }),
+          }
+        );
+      }
+
+      // 4. Створюємо замовлення
       const order = {
         items: cart,
         total: totalPrice,
         date: new Date().toLocaleString(),
       };
 
-      // Відправляємо POST-запит на сервер для створення замовлення
       const response = await fetch(
         "https://6804fc41ca467c15be67df54.mockapi.io/orders",
         {
@@ -40,12 +77,11 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
       const newOrder = await response.json();
       console.log("Замовлення успішно створено:", newOrder);
 
-      // Після успішного оформлення замовлення очищуємо кошик
-      onOrder();
-
-      onClose();
+      onOrder(); // очищення кошика
+      onClose(); // закриваємо модалку
     } catch (error) {
       console.error("Помилка при оформленні замовлення:", error);
+      alert("Сталася помилка під час оформлення замовлення.");
     }
   };
 
