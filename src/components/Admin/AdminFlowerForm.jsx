@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./AdminFlowerForm.module.css";
 import Header from "../Navigation/Navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 const AdminFlowerForm = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +17,25 @@ const AdminFlowerForm = () => {
     image: "",
     disabled: false,
   });
+
+  const [flowers, setFlowers] = useState([]);
+  const [editData, setEditData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const fetchFlowers = async () => {
+    try {
+      const res = await axios.get(
+        "https://6804fc41ca467c15be67df54.mockapi.io/flowers"
+      );
+      setFlowers(res.data);
+    } catch {
+      toast.error("Не вдалося отримати список квітів");
+    }
+  };
+
+  useEffect(() => {
+    fetchFlowers();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -47,9 +69,43 @@ const AdminFlowerForm = () => {
         image: "",
         disabled: false,
       });
+      fetchFlowers();
     } catch (error) {
       toast.error("Сталася помилка при додаванні квітки");
       console.error(error);
+    }
+  };
+
+  const openEditModal = (flower) => {
+    setEditData(flower);
+    setIsModalOpen(true);
+  };
+
+  const handleEditChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setEditData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleEditSubmit = async () => {
+    try {
+      await axios.put(
+        `https://6804fc41ca467c15be67df54.mockapi.io/flowers/${editData.id}`,
+        {
+          ...editData,
+          price: Number(editData.price),
+          oldPrice: Number(editData.oldPrice),
+          quantity: Number(editData.quantity),
+        }
+      );
+      toast.success("Квітку оновлено!");
+      setIsModalOpen(false);
+      fetchFlowers();
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      toast.error("Помилка при оновленні");
     }
   };
 
@@ -57,72 +113,94 @@ const AdminFlowerForm = () => {
     <div className={styles.pageWrapper}>
       <Header />
       <div className={styles.container}>
-        <form onSubmit={handleSubmit} className={styles.formCard}>
-          <div className={styles.inputGroup}>
-            <label>Назва квітки</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className={styles.input}
-            />
-          </div>
+        {/* Список квітів зліва */}
+        <div className={styles.leftPanel}>
+          <h2 className={styles.title}>Список квітів</h2>
+          {flowers.map((flower) => (
+            <div
+              key={flower.id}
+              className={styles.flowerCard}
+              onClick={() => openEditModal(flower)}
+            >
+              <img
+                src={flower.image}
+                alt={flower.name}
+                className={styles.image}
+              />
+              <div>
+                <h4>{flower.name}</h4>
+                <p>Ціна: {flower.price} грн</p>
+              </div>
+            </div>
+          ))}
+        </div>
 
-          <div className={styles.inputGroup}>
-            <label>Ціна</label>
-            <input
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              required
-              className={styles.input}
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label>Стара ціна</label>
-            <input
-              type="number"
-              name="oldPrice"
-              value={formData.oldPrice}
-              onChange={handleChange}
-              className={styles.input}
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label>Кількість</label>
-            <input
-              type="number"
-              name="quantity"
-              value={formData.quantity}
-              onChange={handleChange}
-              required
-              className={styles.input}
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label>URL зображення</label>
-            <input
-              type="url"
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              required
-              className={styles.input}
-            />
-          </div>
-
-          <button type="submit" className={styles.button}>
-            Додати квітку
-          </button>
-        </form>
+        {/* Форма додавання праворуч */}
+        <div className={styles.rightPanel}>
+          <h2 className={styles.title}>Додати нову квітку</h2>
+          <form onSubmit={handleSubmit} className={styles.formCard}>
+            {[
+              { label: "Назва квітки", name: "name", type: "text" },
+              { label: "Ціна", name: "price", type: "number" },
+              { label: "Стара ціна", name: "oldPrice", type: "number" },
+              { label: "Кількість", name: "quantity", type: "number" },
+              { label: "URL зображення", name: "image", type: "url" },
+            ].map(({ label, name, type }) => (
+              <div key={name} className={styles.inputGroup}>
+                <label>{label}</label>
+                <input
+                  type={type}
+                  name={name}
+                  value={formData[name]}
+                  onChange={handleChange}
+                  required={name !== "oldPrice"}
+                  className={styles.input}
+                />
+              </div>
+            ))}
+            <button type="submit" className={styles.button}>
+              Додати квітку
+            </button>
+          </form>
+        </div>
       </div>
-      <ToastContainer position="top-bottom" autoClose={3000} hideProgressBar />
+
+      {/* Модальне редагування */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+      >
+        <h3 className={styles.modalTitle}>Редагувати квітку</h3>
+        {editData && (
+          <div className={styles.formCard}>
+            {["name", "price", "oldPrice", "quantity", "image"].map((field) => (
+              <input
+                key={field}
+                name={field}
+                value={editData[field]}
+                onChange={handleEditChange}
+                className={styles.input}
+              />
+            ))}
+            <label className={styles.checkboxWrapper}>
+              <input
+                type="checkbox"
+                name="disabled"
+                checked={editData.disabled}
+                onChange={handleEditChange}
+              />
+              <span>Недоступна</span>
+            </label>
+            <button className={styles.button} onClick={handleEditSubmit}>
+              Зберегти зміни
+            </button>
+          </div>
+        )}
+      </Modal>
+
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </div>
   );
 };
