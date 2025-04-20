@@ -13,14 +13,12 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cart]);
 
-  // Функція для оформлення замовлення
   const handleOrder = async () => {
-    // Відправляємо дані кошика як нове замовлення на сервер
     try {
       const order = {
         items: cart,
         total: totalPrice,
-        date: new Date().toLocaleString(), // Поточна дата
+        date: new Date().toLocaleString(),
       };
 
       // Відправляємо POST-запит на сервер для створення замовлення
@@ -45,7 +43,6 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
       // Після успішного оформлення замовлення очищуємо кошик
       onOrder();
 
-      // Закриваємо модалку
       onClose();
     } catch (error) {
       console.error("Помилка при оформленні замовлення:", error);
