@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./AdminFlowerForm.module.css";
+import Header from "../Navigation/Navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminFlowerForm = () => {
   const [formData, setFormData] = useState({
@@ -35,7 +38,7 @@ const AdminFlowerForm = () => {
         "https://6804fc41ca467c15be67df54.mockapi.io/flowers",
         flowerData
       );
-      alert("Квітку додано успішно!");
+      toast.success("Квітку додано успішно!");
       setFormData({
         name: "",
         price: "",
@@ -45,66 +48,81 @@ const AdminFlowerForm = () => {
         disabled: false,
       });
     } catch (error) {
-      alert("Сталася помилка при додаванні квітки");
+      toast.error("Сталася помилка при додаванні квітки");
       console.error(error);
     }
   };
 
   return (
     <div className={styles.pageWrapper}>
+      <Header />
       <div className={styles.container}>
-        <h2 className={styles.title}>Додати нову квітку</h2>
         <form onSubmit={handleSubmit} className={styles.formCard}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Назва квітки"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className={styles.input}
-          />
-          <input
-            type="number"
-            name="price"
-            placeholder="Ціна"
-            value={formData.price}
-            onChange={handleChange}
-            required
-            className={styles.input}
-          />
-          <input
-            type="number"
-            name="oldPrice"
-            placeholder="Стара ціна"
-            value={formData.oldPrice}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          <input
-            type="number"
-            name="quantity"
-            placeholder="Кількість"
-            value={formData.quantity}
-            onChange={handleChange}
-            required
-            className={styles.input}
-          />
-          <input
-            type="url"
-            name="image"
-            placeholder="URL зображення"
-            value={formData.image}
-            onChange={handleChange}
-            required
-            className={styles.input}
-          />
+          <div className={styles.inputGroup}>
+            <label>Назва квітки</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label>Ціна</label>
+            <input
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label>Стара ціна</label>
+            <input
+              type="number"
+              name="oldPrice"
+              value={formData.oldPrice}
+              onChange={handleChange}
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label>Кількість</label>
+            <input
+              type="number"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label>URL зображення</label>
+            <input
+              type="url"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+          </div>
 
           <button type="submit" className={styles.button}>
             Додати квітку
           </button>
         </form>
       </div>
+      <ToastContainer position="top-bottom" autoClose={3000} hideProgressBar />
     </div>
   );
 };

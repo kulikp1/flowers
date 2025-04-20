@@ -5,7 +5,7 @@
 }
 
 .container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 40px auto;
   padding: 0 20px;
 }
@@ -22,8 +22,7 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  padding: 24px;
-  margin-bottom: 24px;
+  padding: 32px;
   transition: transform 0.2s ease;
 }
 
@@ -31,13 +30,23 @@
   transform: scale(1.01);
 }
 
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #555;
+}
+
 .input {
-  width: 100%;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
-  margin-bottom: 16px;
 }
 
 .checkboxWrapper {
@@ -45,14 +54,16 @@
   align-items: center;
   gap: 10px;
   margin: 10px 0 20px;
+  font-size: 15px;
+  color: #444;
 }
 
 .button {
   width: 100%;
   background-color: #36d7b7;
   color: white;
-  font-size: 16px;
-  padding: 12px;
+  font-size: 18px;
+  padding: 14px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
