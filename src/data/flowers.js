@@ -1,22 +1,8 @@
 const flowers = [
  
   
-  {
-    id: 4,
-    name: "Гербера жовта",
-    quantity: 90,
-    price: 25,
-    oldPrice: 30,
-    image: "https://laflower.com.ua/assets/images/products/1902/600x600/yellow-gerbera.jpg"
-  },
-  {
-    id: 5,
-    name: "Лілія біла",
-    quantity: 40,
-    price: 50,
-    oldPrice: 55,
-    image: "https://faial.h83.xyz/kvitoposhta/images/52c553b2-b4e42f07-7b0dcaadb209edfd.png"
-  },
+  
+  
   {
     id: 6,
     name: "Хризантема фіолетова",
