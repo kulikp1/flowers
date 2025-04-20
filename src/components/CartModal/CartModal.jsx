@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import styles from "./CartModal.module.css";
+import toast from "react-hot-toast";
 
 const API_BASE = "https://6804fc41ca467c15be67df54.mockapi.io";
 
@@ -49,7 +50,9 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
       const products = await fetchProducts();
 
       if (!checkAvailability(products)) {
-        alert("На складі недостатньо деяких квітів для оформлення замовлення.");
+        toast.error(
+          "На складі недостатньо деяких квітів для оформлення замовлення."
+        );
         setIsProcessing(false);
         return;
       }
@@ -73,12 +76,13 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
       const newOrder = await res.json();
       console.log("Замовлення успішно створено:", newOrder);
 
-      await fetchProducts(); // Опційно
+      toast.success("Замовлення успішно оформлено!");
+      await fetchProducts();
       onOrder();
       onClose();
     } catch (err) {
       console.error("Помилка при оформленні замовлення:", err);
-      alert("Сталася помилка під час оформлення замовлення.");
+      toast.error("Сталася помилка під час оформлення замовлення.");
     } finally {
       setIsProcessing(false);
     }
