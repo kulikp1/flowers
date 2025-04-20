@@ -13,6 +13,45 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cart]);
 
+  // Функція для оформлення замовлення
+  const handleOrder = async () => {
+    // Відправляємо дані кошика як нове замовлення на сервер
+    try {
+      const order = {
+        items: cart,
+        total: totalPrice,
+        date: new Date().toLocaleString(), // Поточна дата
+      };
+
+      // Відправляємо POST-запит на сервер для створення замовлення
+      const response = await fetch(
+        "https://6804fc41ca467c15be67df54.mockapi.io/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(order),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Не вдалося оформити замовлення");
+      }
+
+      const newOrder = await response.json();
+      console.log("Замовлення успішно створено:", newOrder);
+
+      // Після успішного оформлення замовлення очищуємо кошик
+      onOrder();
+
+      // Закриваємо модалку
+      onClose();
+    } catch (error) {
+      console.error("Помилка при оформленні замовлення:", error);
+    }
+  };
+
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -44,7 +83,7 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
               <strong>{totalPrice} грн</strong>
             </div>
             <div className={styles.navBtns}>
-              <button onClick={onOrder} className={styles.orderButton}>
+              <button onClick={handleOrder} className={styles.orderButton}>
                 Оформити замовлення
               </button>
             </div>
