@@ -1,13 +1,6 @@
 const flowers = [
  
-  {
-    id: 3,
-    name: "Півонія рожева",
-    quantity: 30,
-    price: 60,
-    oldPrice: 65,
-    image: "https://donpion.ua/static/media/uploads/product/One_flower/pion/.thumbnails/pion-pink.jpg/pion-pink-472x472.jpg"
-  },
+  
   {
     id: 4,
     name: "Гербера жовта",
