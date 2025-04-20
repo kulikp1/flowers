@@ -111,7 +111,10 @@ const Catalog = () => {
         <h2 className={styles.title}>Каталог квітів</h2>
 
         {loading ? (
-          <p>Завантаження квітів...</p>
+          <div className={styles.loaderWrapper}>
+            <div className={styles.spinner}></div>
+            <p>Завантаження квітів...</p>
+          </div>
         ) : (
           <div className={styles.grid}>
             {flowers.map((flower) => (
@@ -119,7 +122,7 @@ const Catalog = () => {
                 key={flower.id}
                 className={`${styles.card} ${
                   flower.quantity <= 0 ? styles.disabledCard : ""
-                }`} // додаємо клас disabledCard до картки, якщо товар відсутній
+                }`}
               >
                 <img
                   src={flower.image}

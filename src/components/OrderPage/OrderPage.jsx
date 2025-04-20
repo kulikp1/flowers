@@ -6,6 +6,7 @@ const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io";
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -15,6 +16,8 @@ const OrdersPage = () => {
         setOrders(data.reverse()); // останні замовлення першими
       } catch (error) {
         console.error("Помилка при завантаженні замовлень:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -29,7 +32,13 @@ const OrdersPage = () => {
       <Header />
       <div className={styles.container}>
         <h2 className={styles.title}>Мої замовлення</h2>
-        {orders.length === 0 ? (
+
+        {loading ? (
+          <div className={styles.loaderWrapper}>
+            <div className={styles.spinner}></div>
+            <p>Завантаження замовлень...</p>
+          </div>
+        ) : orders.length === 0 ? (
           <p className={styles.empty}>Замовлень ще немає.</p>
         ) : (
           orders.map((order) => (
