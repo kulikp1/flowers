@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "../HomePage/HomePage";
 import Catalog from "../CatalogPage/CatalogPage";
 import Order from "../OrderPage/OrderPage";
+import Admin from "../Admin/AdminFlowerForm";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<Catalog />} />
         <Route path="/orders" element={<Order />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );
