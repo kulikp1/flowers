@@ -11,9 +11,9 @@ const AdminHeader = () => {
         <span className={styles.brandName}>Квітковий кошик</span>
       </div>
       <nav className={styles.nav}>
-        {/* <Link to="/" className={styles.navLink}>
-          На головну
-        </Link> */}
+        <Link to="/" className={styles.navLink}>
+          Переглянути зі сторони клієнта
+        </Link>
         <Link to="/admin" className={styles.navLink}>
           Редагувати каталог
         </Link>

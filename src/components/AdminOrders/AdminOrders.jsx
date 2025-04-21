@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./AdminOrders.module.css";
-
+import AdminHeader from "../AdminNavigation/AdminNavigation";
 const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io/orders";
 
 const AdminOrders = () => {
@@ -25,6 +25,7 @@ const AdminOrders = () => {
 
   return (
     <div className={styles.pageWrapper}>
+      <AdminHeader />
       <div className={styles.container}>
         <h1 className={styles.title}>Замовлення клієнтів</h1>
 
