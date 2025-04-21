@@ -74,7 +74,13 @@ const AdminOrders = () => {
         ) : (
           orders.map((order) => (
             <div key={order.id} className={styles.orderCard}>
-              <div className={styles.orderDate}>Дата: {order.date}</div>
+              <div className={styles.orderMeta}>
+                <div className={styles.orderDate}>📅 Дата: {order.date}</div>
+                <div className={styles.customerInfo}>
+                  👤 <strong>{order.name}</strong> | 📞 {order.phone}
+                </div>
+              </div>
+
               <ul className={styles.orderList}>
                 {(editingOrderId === order.id ? editedItems : order.items).map(
                   (item) => (
@@ -119,6 +125,7 @@ const AdminOrders = () => {
                   )
                 )}
               </ul>
+
               <div className={styles.totalSum}>
                 Загальна сума:{" "}
                 {editingOrderId === order.id
@@ -129,6 +136,7 @@ const AdminOrders = () => {
                   : order.total}{" "}
                 грн
               </div>
+
               {editingOrderId === order.id ? (
                 <button
                   onClick={() => handleSave(order.id)}
