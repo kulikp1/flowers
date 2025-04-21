@@ -1,14 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./PaymentPage.module.css";
 import Header from "../Navigation/Navigation";
 
 export default function PaymentPage() {
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    try {
+      const response = await fetch(
+        "https://6804fc41ca467c15be67df54.mockapi.io/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: "paid" }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Помилка під час оплати");
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Payment failed:", error);
+      alert("Не вдалося провести оплату. Спробуйте ще раз.");
+    }
   };
+
+  useEffect(() => {
+    if (submitted) {
+      const timeout = setTimeout(() => {
+        navigate("/products"); // змінити на потрібний маршрут
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [submitted, navigate]);
 
   return (
     <div className={styles.pageWrapper}>
@@ -19,7 +51,7 @@ export default function PaymentPage() {
         <div className={styles.card}>
           {submitted ? (
             <div className={styles.successMessage}>
-              ✅ Оплата пройшла успішно!
+              ✅ Оплата пройшла успішно! Переадресація...
             </div>
           ) : (
             <form onSubmit={handlePayment} className={styles.form}>

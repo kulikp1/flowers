@@ -81,6 +81,15 @@ const AdminOrders = () => {
                 </div>
               </div>
 
+              {/* Статус оплати */}
+              <div className={styles.orderStatus}>
+                {order.status === "paid" ? (
+                  <span className={styles.paid}>🟢 Сплачено</span>
+                ) : (
+                  <span className={styles.unpaid}>🔴 Не сплачено</span>
+                )}
+              </div>
+
               <ul className={styles.orderList}>
                 {(editingOrderId === order.id ? editedItems : order.items).map(
                   (item) => (

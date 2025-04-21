@@ -195,3 +195,16 @@
   font-weight: 500;
   color: #555;
 }
+
+.orderStatus {
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.paid {
+  color: green;
+}
+
+.unpaid {
+  color: red;
+}
