@@ -128,3 +128,35 @@
     transform: rotate(360deg);
   }
 }
+.editButton,
+.saveButton {
+  padding: 10px 20px;
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Кнопка редагування — ніжний персиковий */
+.editButton {
+  background-color: #fcd5ce;
+  color: #5a2a27;
+}
+
+.editButton:hover {
+  background-color: #fbb1a8;
+}
+
+/* Кнопка збереження — м’який рожевий */
+.saveButton {
+  background-color: #f8c8dc;
+  color: #4a2c3a;
+}
+
+.saveButton:hover {
+  background-color: #f4a9c7;
+}

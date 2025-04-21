@@ -130,9 +130,17 @@ const AdminOrders = () => {
                 грн
               </div>
               {editingOrderId === order.id ? (
-                <button onClick={() => handleSave(order.id)}>Зберегти</button>
+                <button
+                  onClick={() => handleSave(order.id)}
+                  className={styles.saveButton}
+                >
+                  Зберегти
+                </button>
               ) : (
-                <button onClick={() => handleEditClick(order)}>
+                <button
+                  onClick={() => handleEditClick(order)}
+                  className={styles.editButton}
+                >
                   Редагувати
                 </button>
               )}
