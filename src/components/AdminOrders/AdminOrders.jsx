@@ -7,6 +7,8 @@ const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io/orders";
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editingOrderId, setEditingOrderId] = useState(null);
+  const [editedItems, setEditedItems] = useState([]);
 
   useEffect(() => {
     fetchOrders();
@@ -20,6 +22,38 @@ const AdminOrders = () => {
       console.error("Помилка при завантаженні:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleEditClick = (order) => {
+    setEditingOrderId(order.id);
+    setEditedItems(order.items);
+  };
+
+  const handleQuantityChange = (itemId, newQuantity) => {
+    setEditedItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId
+          ? { ...item, quantity: parseInt(newQuantity) || 0 }
+          : item
+      )
+    );
+  };
+
+  const handleSave = async (orderId) => {
+    try {
+      const updatedOrder = {
+        items: editedItems,
+        total: editedItems.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        ),
+      };
+      await axios.put(`${API_URL}/${orderId}`, updatedOrder);
+      setEditingOrderId(null);
+      fetchOrders(); // Оновити список замовлень
+    } catch (error) {
+      console.error("Помилка при збереженні:", error);
     }
   };
 
@@ -41,7 +75,7 @@ const AdminOrders = () => {
             <div key={order.id} className={styles.orderCard}>
               <div className={styles.orderDate}>Дата: {order.date}</div>
               <ul className={styles.orderList}>
-                {order.items
+                {(editingOrderId === order.id ? editedItems : order.items)
                   .filter((item) => !item.disabled)
                   .map((item) => (
                     <li key={item.id} className={styles.orderItem}>
@@ -60,10 +94,22 @@ const AdminOrders = () => {
                           style={{ borderRadius: "8px", objectFit: "cover" }}
                         />
                         <div>
+                          <strong>{item.name}</strong>
                           <div>
-                            <strong>{item.name}</strong>
+                            {editingOrderId === order.id ? (
+                              <input
+                                type="number"
+                                min="1"
+                                value={item.quantity}
+                                onChange={(e) =>
+                                  handleQuantityChange(item.id, e.target.value)
+                                }
+                                style={{ width: "60px", marginTop: "4px" }}
+                              />
+                            ) : (
+                              <>Кількість: {item.quantity}</>
+                            )}
                           </div>
-                          <div>Кількість: {item.quantity}</div>
                         </div>
                       </div>
                       <div>{item.price} грн</div>
@@ -71,8 +117,22 @@ const AdminOrders = () => {
                   ))}
               </ul>
               <div className={styles.totalSum}>
-                Загальна сума: {order.total} грн
+                Загальна сума:{" "}
+                {editingOrderId === order.id
+                  ? editedItems.reduce(
+                      (sum, item) => sum + item.price * item.quantity,
+                      0
+                    )
+                  : order.total}{" "}
+                грн
               </div>
+              {editingOrderId === order.id ? (
+                <button onClick={() => handleSave(order.id)}>Зберегти</button>
+              ) : (
+                <button onClick={() => handleEditClick(order)}>
+                  Редагувати
+                </button>
+              )}
             </div>
           ))
         )}
