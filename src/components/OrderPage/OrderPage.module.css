@@ -1,81 +1,98 @@
 .pageWrapper {
   background: linear-gradient(to bottom right, #fff0f5, #ffe4e1);
   min-height: 100vh;
-  padding-bottom: 40px;
+  padding-bottom: 60px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
+  max-width: 960px;
+  margin: 60px auto;
+  padding: 0 24px;
 }
 
 .title {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 30px;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
   text-align: center;
-  color: #333;
+  color: #2d2d2d;
 }
 
 .empty {
   text-align: center;
-  font-size: 18px;
-  color: #777;
+  font-size: 20px;
+  color: #999;
+  margin-top: 60px;
 }
 
 .orderCard {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  padding: 24px;
-  margin-bottom: 24px;
-  transition: transform 0.2s ease;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 6px solid #ff4fa1;
 }
 
 .orderCard:hover {
-  transform: scale(1.01);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.1);
 }
 
 .orderDate {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: 16px;
-  color: #444;
+  margin-bottom: 20px;
+  color: #3c3c3c;
 }
 
 .orderList {
   list-style: none;
   padding: 0;
   margin: 0;
+  border-top: 1px solid #eee;
 }
 
 .orderItem {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 17px;
   color: #555;
+}
+
+.orderItem span:nth-child(1) {
+  flex: 2;
+}
+
+.orderItem span:nth-child(2),
+.orderItem span:nth-child(3) {
+  flex: 1;
+  text-align: right;
 }
 
 .orderItem:last-child {
   border-bottom: none;
 }
+
 .totalSum {
-  margin-top: 16px;
+  margin-top: 20px;
   text-align: right;
-  font-size: 18px;
-  font-weight: 500;
-  color: #222;
+  font-size: 19px;
+  font-weight: 600;
+  color: #2b2b2b;
 }
+
 .loaderWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  gap: 10px;
+  gap: 12px;
   text-align: center;
 }
 
