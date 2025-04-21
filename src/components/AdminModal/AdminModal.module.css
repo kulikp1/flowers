@@ -48,29 +48,40 @@
 
 .button {
   width: 100%;
-  background: linear-gradient(to right, #36d7b7, #2bb3a2);
-  color: white;
+  background: linear-gradient(
+    to right,
+    #fcd5ce,
+    #f8c8dc
+  ); /* ніжно-персиково-рожевий */
+  color: #4a2c3a;
   font-size: 18px;
   font-weight: 600;
   padding: 14px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
 .button:hover {
-  background: linear-gradient(to right, #2bb3a2, #1c9183);
+  background: linear-gradient(to right, #fbb1a8, #f4a9c7);
   transform: translateY(-2px);
 }
 
+/* Delete button - теж трохи м’якший, але з акцентом */
 .deleteButton {
   margin-top: 14px;
-  background: linear-gradient(to right, #ff4d4f, #ff7375);
+  background: linear-gradient(
+    to right,
+    #ffc2c2,
+    #ffaaaa
+  ); /* рожевий відтінок */
+  color: #5a2a27;
 }
 
 .deleteButton:hover {
-  background: linear-gradient(to right, #e64545, #ff5e5f);
+  background: linear-gradient(to right, #ff9e9e, #ff8686);
 }
 
 .modal {
