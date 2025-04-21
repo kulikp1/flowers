@@ -17,7 +17,7 @@ const AdminHeader = () => {
         <Link to="/admin" className={styles.navLink}>
           Редагувати каталог
         </Link>
-        <Link to="/orders" className={styles.navLink}>
+        <Link to="/adminOrders" className={styles.navLink}>
           Список замовлень
         </Link>
       </nav>
