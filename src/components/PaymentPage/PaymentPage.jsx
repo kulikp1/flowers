@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styles from "./PaymentPage.module.css";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import Header from "../Navigation/Navigation";
 
 export default function PaymentPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -14,6 +12,7 @@ export default function PaymentPage() {
 
   return (
     <div className={styles.pageWrapper}>
+      <Header />
       <div className={styles.container}>
         <h2 className={styles.title}>Оплата замовлення</h2>
 
@@ -25,9 +24,10 @@ export default function PaymentPage() {
           ) : (
             <form onSubmit={handlePayment} className={styles.form}>
               <div className={styles.formGroup}>
-                <Label htmlFor="cardNumber">Номер картки</Label>
-                <Input
+                <label htmlFor="cardNumber">Номер картки</label>
+                <input
                   id="cardNumber"
+                  type="text"
                   placeholder="1234 5678 9012 3456"
                   required
                 />
@@ -35,23 +35,28 @@ export default function PaymentPage() {
 
               <div className={styles.row}>
                 <div className={styles.formGroup}>
-                  <Label htmlFor="expiry">Термін дії</Label>
-                  <Input id="expiry" placeholder="MM/YY" required />
+                  <label htmlFor="expiry">Термін дії</label>
+                  <input id="expiry" type="text" placeholder="MM/YY" required />
                 </div>
                 <div className={styles.formGroup}>
-                  <Label htmlFor="cvv">CVV</Label>
-                  <Input id="cvv" placeholder="123" required />
+                  <label htmlFor="cvv">CVV</label>
+                  <input id="cvv" type="text" placeholder="123" required />
                 </div>
               </div>
 
               <div className={styles.formGroup}>
-                <Label htmlFor="name">Ім'я власника картки</Label>
-                <Input id="name" placeholder="Ім’я Прізвище" required />
+                <label htmlFor="name">Ім'я власника картки</label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Ім’я Прізвище"
+                  required
+                />
               </div>
 
-              <Button type="submit" className={styles.button}>
+              <button type="submit" className={styles.button}>
                 Оплатити
-              </Button>
+              </button>
             </form>
           )}
         </div>

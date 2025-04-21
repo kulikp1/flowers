@@ -5,6 +5,7 @@ import Catalog from "../CatalogPage/CatalogPage";
 import Order from "../OrderPage/OrderPage";
 import Admin from "../Admin/AdminFlowerForm";
 import AdminOrders from "../AdminOrders/AdminOrders";
+import PaymentPage from "../PaymentPage/PaymentPage";
 
 import { Toaster } from "react-hot-toast";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/orders" element={<Order />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/adminOrders" element={<AdminOrders />} />
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
     </Router>
   );

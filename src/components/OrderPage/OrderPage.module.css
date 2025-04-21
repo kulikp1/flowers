@@ -110,3 +110,27 @@
     transform: rotate(360deg);
   }
 }
+
+/* Стилі для кнопки оплати */
+.payButton {
+  margin-top: 20px;
+  padding: 14px 32px;
+  background-color: #ff4fa1;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.payButton:hover {
+  background-color: #e03e8e;
+  transform: translateY(-2px);
+}
+
+.payButton:active {
+  background-color: #d04a6a;
+  transform: translateY(0);
+}

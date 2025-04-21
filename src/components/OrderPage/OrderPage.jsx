@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../Navigation/Navigation";
 import styles from "./OrderPage.module.css";
 
@@ -7,6 +8,7 @@ const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io";
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -27,6 +29,10 @@ const OrdersPage = () => {
   const calculateTotal = (items) =>
     items.reduce((total, item) => total + item.price * item.quantity, 0);
 
+  const handlePay = (order) => {
+    navigate("/payment", { state: { order } }); // передаємо дані замовлення через state
+  };
+
   return (
     <div className={styles.pageWrapper}>
       <Header />
@@ -45,7 +51,6 @@ const OrdersPage = () => {
             <div key={order.id} className={styles.orderCard}>
               <h4 className={styles.orderDate}>Замовлення від {order.date}</h4>
 
-              {/* Додано ім’я та телефон */}
               <p>
                 <strong>Ім’я:</strong> {order.name || "—"}
               </p>
@@ -69,6 +74,13 @@ const OrdersPage = () => {
                   {order.total || calculateTotal(order.items)} грн
                 </strong>
               </div>
+
+              <button
+                className={styles.payButton}
+                onClick={() => handlePay(order)}
+              >
+                Сплатити
+              </button>
             </div>
           ))
         )}
