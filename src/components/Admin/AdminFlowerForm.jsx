@@ -4,9 +4,7 @@ import styles from "./AdminFlowerForm.module.css";
 import Header from "../Navigation/Navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Modal from "react-modal";
-
-Modal.setAppElement("#root");
+import AdminModal from "../AdminModal/AdminModal";
 
 const AdminFlowerForm = () => {
   const [formData, setFormData] = useState({
@@ -179,45 +177,14 @@ const AdminFlowerForm = () => {
         </div>
       </div>
 
-      <Modal
+      <AdminModal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        className={styles.modal}
-        overlayClassName={styles.overlay}
-      >
-        <h3 className={styles.modalTitle}>Редагувати квітку</h3>
-        {editData && (
-          <div className={styles.formCard}>
-            {[
-              { label: "Назва квітки", name: "name", type: "text" },
-              { label: "Ціна", name: "price", type: "number" },
-              { label: "Стара ціна", name: "oldPrice", type: "number" },
-              { label: "Кількість", name: "quantity", type: "number" },
-              { label: "URL зображення", name: "image", type: "url" },
-            ].map(({ label, name, type }) => (
-              <div key={name} className={styles.inputGroup}>
-                <label>{label}</label>
-                <input
-                  type={type}
-                  name={name}
-                  value={editData[name]}
-                  onChange={handleEditChange}
-                  className={styles.input}
-                />
-              </div>
-            ))}
-            <button className={styles.button} onClick={handleEditSubmit}>
-              Зберегти зміни
-            </button>
-            <button
-              className={`${styles.button} ${styles.deleteButton}`}
-              onClick={handleDelete}
-            >
-              Видалити квітку
-            </button>
-          </div>
-        )}
-      </Modal>
+        editData={editData}
+        onEditChange={handleEditChange}
+        onEditSubmit={handleEditSubmit}
+        onDelete={handleDelete}
+      />
 
       <ToastContainer
         position="bottom-right"
