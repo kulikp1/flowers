@@ -211,7 +211,11 @@ const AdminFlowerForm = () => {
         )}
       </Modal>
 
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar
+      />
     </div>
   );
 };
