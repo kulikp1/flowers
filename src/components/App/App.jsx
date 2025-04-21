@@ -4,6 +4,8 @@ import HomePage from "../HomePage/HomePage";
 import Catalog from "../CatalogPage/CatalogPage";
 import Order from "../OrderPage/OrderPage";
 import Admin from "../Admin/AdminFlowerForm";
+import AdminOrders from "../AdminOrders/AdminOrders";
+
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -16,7 +18,7 @@ function App() {
         <Route path="/products" element={<Catalog />} />
         <Route path="/orders" element={<Order />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/adminOrders" element={<Admin />} />
+        <Route path="/adminOrders" element={<AdminOrders />} />
       </Routes>
     </Router>
   );
