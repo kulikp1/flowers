@@ -44,6 +44,15 @@ const OrdersPage = () => {
           orders.map((order) => (
             <div key={order.id} className={styles.orderCard}>
               <h4 className={styles.orderDate}>Замовлення від {order.date}</h4>
+
+              {/* Додано ім’я та телефон */}
+              <p>
+                <strong>Ім’я:</strong> {order.name || "—"}
+              </p>
+              <p>
+                <strong>Телефон:</strong> {order.phone || "—"}
+              </p>
+
               <ul className={styles.orderList}>
                 {order.items.map((item) => (
                   <li key={item.id} className={styles.orderItem}>
@@ -53,6 +62,7 @@ const OrdersPage = () => {
                   </li>
                 ))}
               </ul>
+
               <div className={styles.totalSum}>
                 Загальна сума:{" "}
                 <strong>

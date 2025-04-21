@@ -6,6 +6,8 @@ const API_BASE = "https://6804fc41ca467c15be67df54.mockapi.io";
 
 const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
   const [isProcessing, setIsProcessing] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   const totalPrice = useMemo(() => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -44,9 +46,19 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
   };
 
   const handleOrder = async () => {
+    if (!name.trim() || !phone.trim()) {
+      toast.error("Будь ласка, введіть ім’я та номер телефону.");
+      return;
+    }
+
+    const phoneRegex = /^[\d\s()+-]{7,20}$/;
+    if (!phoneRegex.test(phone)) {
+      toast.error("Невірний формат номера телефону.");
+      return;
+    }
+
     try {
       setIsProcessing(true);
-
       const products = await fetchProducts();
 
       if (!checkAvailability(products)) {
@@ -62,6 +74,8 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
       const order = {
         items: cart,
         total: totalPrice,
+        name,
+        phone,
         date: new Date().toLocaleString(),
       };
 
@@ -73,11 +87,7 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
 
       if (!res.ok) throw new Error("Не вдалося оформити замовлення");
 
-      const newOrder = await res.json();
-      console.log("Замовлення успішно створено:", newOrder);
-
       toast.success("Замовлення успішно оформлено!");
-      await fetchProducts();
       onOrder();
       onClose();
     } catch (err) {
@@ -130,10 +140,33 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
                 <CartItem key={item.id} item={item} />
               ))}
             </ul>
+
             <div className={styles.totalRow}>
               <span>Загальна сума:</span>
               <strong>{totalPrice} грн</strong>
             </div>
+
+            <div className={styles.inputGroup}>
+              <label>Ваше ім’я</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={styles.input}
+                placeholder="Ім’я"
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Номер телефону</label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className={styles.input}
+                placeholder="+380..."
+              />
+            </div>
+
             <div className={styles.navBtns}>
               <button
                 onClick={handleOrder}
