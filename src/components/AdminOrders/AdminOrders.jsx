@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import styles from "./AdminOrders.module.css";
 
 const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io/orders";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [editingOrder, setEditingOrder] = useState(null);
-  const { register, handleSubmit, reset } = useForm();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchOrders();
@@ -20,107 +18,62 @@ const AdminOrders = () => {
       setOrders(res.data);
     } catch (error) {
       console.error("Помилка при завантаженні:", error);
-    }
-  };
-
-  const onEditClick = (order) => {
-    setEditingOrder(order);
-    reset(order);
-  };
-
-  const onSubmit = async (data) => {
-    try {
-      await axios.put(`${API_URL}/${editingOrder.id}`, {
-        ...data,
-        quantity: Number(data.quantity),
-      });
-      setEditingOrder(null);
-      fetchOrders();
-    } catch (error) {
-      console.error("Помилка при збереженні:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className={styles.page}>
+    <div className={styles.pageWrapper}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Панель керування замовленнями</h1>
+        <h1 className={styles.title}>Замовлення клієнтів</h1>
 
-        {orders.length === 0 ? (
-          <p className={styles.emptyText}>Немає замовлень для відображення</p>
+        {loading ? (
+          <div className={styles.loaderWrapper}>
+            <div className={styles.spinner}></div>
+            <p>Завантаження замовлень...</p>
+          </div>
+        ) : orders.length === 0 ? (
+          <p className={styles.empty}>Немає замовлень</p>
         ) : (
-          <div className={styles.orderList}>
-            {orders.map((order) => (
-              <div key={order.id} className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <span className={styles.cardTitle}>
-                    Замовлення #{order.id}
-                  </span>
-                  <button
-                    className={styles.editButton}
-                    onClick={() => onEditClick(order)}
-                  >
-                    ✏️ Редагувати
-                  </button>
-                </div>
-                <div className={styles.cardBody}>
-                  <p>
-                    <strong>Ім’я клієнта:</strong> {order.customerName}
-                  </p>
-                  <p>
-                    <strong>Товар:</strong> {order.product}
-                  </p>
-                  <p>
-                    <strong>Кількість:</strong> {order.quantity}
-                  </p>
-                </div>
+          orders.map((order) => (
+            <div key={order.id} className={styles.orderCard}>
+              <div className={styles.orderDate}>Дата: {order.date}</div>
+              <ul className={styles.orderList}>
+                {order.items
+                  .filter((item) => !item.disabled)
+                  .map((item) => (
+                    <li key={item.id} className={styles.orderItem}>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "12px",
+                        }}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          width={60}
+                          height={60}
+                          style={{ borderRadius: "8px", objectFit: "cover" }}
+                        />
+                        <div>
+                          <div>
+                            <strong>{item.name}</strong>
+                          </div>
+                          <div>Кількість: {item.quantity}</div>
+                        </div>
+                      </div>
+                      <div>{item.price} грн</div>
+                    </li>
+                  ))}
+              </ul>
+              <div className={styles.totalSum}>
+                Загальна сума: {order.total} грн
               </div>
-            ))}
-          </div>
-        )}
-
-        {editingOrder && (
-          <div className={styles.formWrapper}>
-            <h2 className={styles.formTitle}>
-              Редагування замовлення #{editingOrder.id}
-            </h2>
-            <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-              <label className={styles.label}>Ім’я клієнта</label>
-              <input
-                className={styles.input}
-                {...register("customerName")}
-                placeholder="Ім’я"
-              />
-
-              <label className={styles.label}>Товар</label>
-              <input
-                className={styles.input}
-                {...register("product")}
-                placeholder="Назва товару"
-              />
-
-              <label className={styles.label}>Кількість</label>
-              <input
-                className={styles.input}
-                type="number"
-                {...register("quantity")}
-                placeholder="Кількість"
-              />
-
-              <div className={styles.buttonGroup}>
-                <button type="submit" className={styles.saveButton}>
-                  💾 Зберегти
-                </button>
-                <button
-                  type="button"
-                  className={styles.cancelButton}
-                  onClick={() => setEditingOrder(null)}
-                >
-                  ❌ Скасувати
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+          ))
         )}
       </div>
     </div>
