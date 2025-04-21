@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./AdminOrders.module.css";
 import AdminHeader from "../AdminNavigation/AdminNavigation";
+
 const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io/orders";
 
 const AdminOrders = () => {
@@ -51,7 +52,7 @@ const AdminOrders = () => {
       };
       await axios.put(`${API_URL}/${orderId}`, updatedOrder);
       setEditingOrderId(null);
-      fetchOrders(); // Оновити список замовлень
+      fetchOrders();
     } catch (error) {
       console.error("Помилка при збереженні:", error);
     }
@@ -75,27 +76,28 @@ const AdminOrders = () => {
             <div key={order.id} className={styles.orderCard}>
               <div className={styles.orderDate}>Дата: {order.date}</div>
               <ul className={styles.orderList}>
-                {(editingOrderId === order.id ? editedItems : order.items)
-                  .filter((item) => !item.disabled)
-                  .map((item) => (
-                    <li key={item.id} className={styles.orderItem}>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "12px",
-                        }}
-                      >
+                {(editingOrderId === order.id ? editedItems : order.items).map(
+                  (item) => (
+                    <li
+                      key={item.id}
+                      className={`${styles.orderItem} ${
+                        item.disabled ? styles.disabledItem : ""
+                      }`}
+                    >
+                      <div className={styles.itemInfo}>
                         <img
                           src={item.image}
                           alt={item.name}
-                          width={60}
-                          height={60}
-                          style={{ borderRadius: "8px", objectFit: "cover" }}
+                          className={styles.itemImage}
                         />
                         <div>
                           <strong>{item.name}</strong>
-                          <div>
+                          {item.disabled && (
+                            <div className={styles.disabledText}>
+                              (деактивовано)
+                            </div>
+                          )}
+                          <div className={styles.quantityWrapper}>
                             {editingOrderId === order.id ? (
                               <input
                                 type="number"
@@ -104,7 +106,7 @@ const AdminOrders = () => {
                                 onChange={(e) =>
                                   handleQuantityChange(item.id, e.target.value)
                                 }
-                                style={{ width: "60px", marginTop: "4px" }}
+                                className={styles.quantityInput}
                               />
                             ) : (
                               <>Кількість: {item.quantity}</>
@@ -114,7 +116,8 @@ const AdminOrders = () => {
                       </div>
                       <div>{item.price} грн</div>
                     </li>
-                  ))}
+                  )
+                )}
               </ul>
               <div className={styles.totalSum}>
                 Загальна сума:{" "}

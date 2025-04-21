@@ -64,6 +64,38 @@
   border-bottom: none;
 }
 
+.disabledItem {
+  opacity: 0.5;
+}
+
+.disabledText {
+  color: red;
+  font-size: 0.9em;
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.itemImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.quantityWrapper {
+  margin-top: 4px;
+}
+
+.quantityInput {
+  width: 60px;
+  padding: 2px 6px;
+  font-size: 14px;
+}
+
 .totalSum {
   margin-top: 16px;
   text-align: right;
