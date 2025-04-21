@@ -188,16 +188,24 @@ const AdminFlowerForm = () => {
         <h3 className={styles.modalTitle}>Редагувати квітку</h3>
         {editData && (
           <div className={styles.formCard}>
-            {["name", "price", "oldPrice", "quantity", "image"].map((field) => (
-              <input
-                key={field}
-                name={field}
-                value={editData[field]}
-                onChange={handleEditChange}
-                className={styles.input}
-              />
+            {[
+              { label: "Назва квітки", name: "name", type: "text" },
+              { label: "Ціна", name: "price", type: "number" },
+              { label: "Стара ціна", name: "oldPrice", type: "number" },
+              { label: "Кількість", name: "quantity", type: "number" },
+              { label: "URL зображення", name: "image", type: "url" },
+            ].map(({ label, name, type }) => (
+              <div key={name} className={styles.inputGroup}>
+                <label>{label}</label>
+                <input
+                  type={type}
+                  name={name}
+                  value={editData[name]}
+                  onChange={handleEditChange}
+                  className={styles.input}
+                />
+              </div>
             ))}
-            <label className={styles.checkboxWrapper}></label>
             <button className={styles.button} onClick={handleEditSubmit}>
               Зберегти зміни
             </button>
