@@ -36,6 +36,18 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: 300px; /* обмежує висоту */
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.cartList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cartList::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
 
 .cartItem {
