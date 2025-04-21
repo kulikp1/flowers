@@ -13,7 +13,7 @@
   justify-content: center;
   padding: 40px 80px;
   gap: 220px;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .textContent {
