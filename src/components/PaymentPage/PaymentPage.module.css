@@ -1,0 +1,62 @@
+.pageWrapper {
+  background: linear-gradient(to bottom right, #fff0f5, #ffe4e1);
+  min-height: 100vh;
+  padding-bottom: 60px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #2d2d2d;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  padding: 28px 32px;
+  border-left: 6px solid #ff4fa1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+}
+
+.successMessage {
+  text-align: center;
+  color: #28a745;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.button {
+  margin-top: 12px;
+}
