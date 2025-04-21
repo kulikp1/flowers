@@ -1,24 +1,32 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./PaymentPage.module.css";
 import Header from "../Navigation/Navigation";
 
 export default function PaymentPage() {
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const order = location.state?.order;
 
   const handlePayment = async (e) => {
     e.preventDefault();
 
+    if (!order?.id) {
+      alert("Помилка: відсутній ID замовлення");
+      return;
+    }
+
     try {
       const response = await fetch(
-        "https://6804fc41ca467c15be67df54.mockapi.io/orders",
+        `https://6804fc41ca467c15be67df54.mockapi.io/orders/${order.id}`,
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ status: "paid" }),
+          body: JSON.stringify({ ...order, status: "paid" }),
         }
       );
 
@@ -36,7 +44,7 @@ export default function PaymentPage() {
   useEffect(() => {
     if (submitted) {
       const timeout = setTimeout(() => {
-        navigate("/products"); // змінити на потрібний маршрут
+        navigate("/products");
       }, 2000);
       return () => clearTimeout(timeout);
     }
