@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./AdminFlowerForm.module.css";
-import Header from "../Navigation/Navigation";
+import AdminHeader from "../AdminNavigation/AdminNavigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminModal from "../AdminModal/AdminModal";
@@ -125,7 +125,7 @@ const AdminFlowerForm = () => {
 
   return (
     <div className={styles.pageWrapper}>
-      <Header />
+      <AdminHeader />
       <div className={styles.container}>
         <div className={styles.leftPanel}>
           <h2 className={styles.title}>Список квітів</h2>

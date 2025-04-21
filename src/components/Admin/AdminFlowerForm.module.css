@@ -57,3 +57,78 @@
   border-radius: 12px;
   border: 1px solid #eee;
 }
+
+.formCard {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+  padding: 36px;
+  transition: transform 0.2s ease;
+}
+
+.formCard:hover {
+  transform: scale(1.005);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+.inputGroup label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+  font-size: 15px;
+}
+
+.input {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #36d7b7;
+  box-shadow: 0 0 0 3px rgba(54, 215, 183, 0.2);
+}
+
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 24px;
+  font-size: 15px;
+  color: #555;
+}
+
+.button {
+  width: 100%;
+  background: linear-gradient(to right, #36d7b7, #2bb3a2);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background: linear-gradient(to right, #2bb3a2, #1c9183);
+  transform: translateY(-2px);
+}
+
+.deleteButton {
+  margin-top: 14px;
+  background: linear-gradient(to right, #ff4d4f, #ff7375);
+}
+
+.deleteButton:hover {
+  background: linear-gradient(to right, #e64545, #ff5e5f);
+}
