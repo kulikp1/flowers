@@ -3,6 +3,7 @@ import styles from "./HomePage.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import Navigation from "../Navigation/Navigation";
+import ChatWidget from "../ChatWidget/ChatWidget";
 
 const HomePage = () => {
   return (
@@ -33,6 +34,7 @@ const HomePage = () => {
         <div className={styles.heroImage}>
           <img src={logo} alt="Квіткова корзина" className={styles.heroLogo} />
         </div>
+        <ChatWidget />
       </main>
     </div>
   );
