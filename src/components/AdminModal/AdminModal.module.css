@@ -48,11 +48,7 @@
 
 .button {
   width: 100%;
-  background: linear-gradient(
-    to right,
-    #fcd5ce,
-    #f8c8dc
-  ); /* ніжно-персиково-рожевий */
+  background: linear-gradient(to right, #fcd5ce, #f8c8dc);
   color: #4a2c3a;
   font-size: 18px;
   font-weight: 600;
@@ -69,14 +65,9 @@
   transform: translateY(-2px);
 }
 
-/* Delete button - теж трохи м’якший, але з акцентом */
 .deleteButton {
   margin-top: 14px;
-  background: linear-gradient(
-    to right,
-    #ffc2c2,
-    #ffaaaa
-  ); /* рожевий відтінок */
+  background: linear-gradient(to right, #ffc2c2, #ffaaaa);
   color: #5a2a27;
 }
 
