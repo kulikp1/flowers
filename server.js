@@ -17,20 +17,15 @@ app.post("/chat", async (req, res) => {
     const flowersResponse = await axios.get("https://6804fc41ca467c15be67df54.mockapi.io/flowers");
     const flowers = flowersResponse.data;
 
-    // Відфільтровуємо лише активні квіти
-    const availableFlowers = flowers.filter(flower => !flower.disabled);
-
-    // Створюємо markdown-опис квітів з фото
-    const flowerList = availableFlowers
+    // Формуємо текстовий опис квітів для промпта
+    const flowerList = flowers
       .map(flower => {
-        const url = `https://6804fc41ca467c15be67df54.mockapi.io/flowers/${flower.id}`;
-        return `- **${flower.name}** — ${flower.price} грн  
-  ![${flower.name}](${flower.image})  
-  [Детальніше](${url})`;
+        return `- ${flower.name}: ${flower.description || "без опису"}, ціна — ${flower.price} грн`;
       })
-      .slice(0, 10) // обмеження для уникнення перевантаження prompt
+      .slice(0, 10) // можна змінити кількість, якщо хочеш більше
       .join("\n");
 
+    // Формуємо system prompt
     const systemPrompt = `
 Ти — досвідчений флорист-консультант. Спілкуйся виключно українською мовою.
 Твоє завдання — допомогти клієнтам вибрати букет для різних ситуацій: день народження, побачення, 8 березня, вибачення, подяка, ювілей, випускний тощо.
@@ -40,7 +35,7 @@ app.post("/chat", async (req, res) => {
 Ось квіти, які є в наявності:
 ${flowerList}
 
-Якщо клієнт хоче букет — порекомендуй щось із цього списку, із зазначенням назви та короткого опису.
+Якщо клієнт хоче букет — пропонуй щось із цього списку.
 `;
 
     const response = await axios.post(
