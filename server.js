@@ -3,6 +3,7 @@ import cors from "cors";
 import axios from "axios";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid"; 
+const API_FLOWER = "https://6804fc41ca467c15be67df54.mockapi.io/flowers";
 
 dotenv.config();
 
@@ -56,7 +57,7 @@ app.post("/chat", async (req, res) => {
   }
 
   try {
-    const flowersResponse = await axios.get("https://6804fc41ca467c15be67df54.mockapi.io/flowers");
+    const flowersResponse = await axios.get(API_FLOWER);
     const flowers = flowersResponse.data;
 
     const flowerList = flowers
