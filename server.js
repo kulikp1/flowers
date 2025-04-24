@@ -16,10 +16,10 @@ app.post("/chat", async (req, res) => {
   let { message, sessionId } = req.body;
 
   if (!sessionId) {
-    sessionId = uuidv4(); // нова сесія
+    sessionId = uuidv4(); 
   }
 
-  // Ініціалізація сесії
+  
   if (!sessions[sessionId]) {
     sessions[sessionId] = {
       step: "target",
@@ -31,7 +31,7 @@ app.post("/chat", async (req, res) => {
 
   const session = sessions[sessionId];
 
-  // 🔄 Обробка кроків
+  
   if (session.step === "target") {
     session.target = message;
     session.step = "occasion";
