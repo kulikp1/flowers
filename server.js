@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import axios from "axios";
 import dotenv from "dotenv";
+import { v4 as uuidv4 } from "uuid"; 
 
 dotenv.config();
 
@@ -9,48 +10,79 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const sessions = {}; 
+
 app.post("/chat", async (req, res) => {
-  const { message } = req.body;
+  let { message, sessionId } = req.body;
+
+  if (!sessionId) {
+    sessionId = uuidv4(); // нова сесія
+  }
+
+  // Ініціалізація сесії
+  if (!sessions[sessionId]) {
+    sessions[sessionId] = {
+      step: "target",
+      target: null,
+      occasion: null,
+      budget: null,
+    };
+  }
+
+  const session = sessions[sessionId];
+
+  // 🔄 Обробка кроків
+  if (session.step === "target") {
+    session.target = message;
+    session.step = "occasion";
+    return res.json({
+      sessionId,
+      reply: "Чудово! А з якого приводу даруєте букет? 🎉 (наприклад, день народження, вибачення...)",
+    });
+  }
+
+  if (session.step === "occasion") {
+    session.occasion = message;
+    session.step = "budget";
+    return res.json({
+      sessionId,
+      reply: "А який бюджет ви розраховуєте на букет? 💸",
+    });
+  }
+
+  if (session.step === "budget") {
+    session.budget = message;
+    session.step = "done";
+  }
 
   try {
-    // Отримуємо список квітів із вашого API
     const flowersResponse = await axios.get("https://6804fc41ca467c15be67df54.mockapi.io/flowers");
     const flowers = flowersResponse.data;
 
-    // Формуємо текстовий опис квітів для промпта
     const flowerList = flowers
-      .map(flower => {
-        return `- ${flower.name}: ${flower.description || "без опису"}, ціна — ${flower.price} грн`;
-      })
-      .slice(0, 10) // можна змінити кількість, якщо хочеш більше
+      .map(f => `- ${f.name}: ${f.description || "без опису"}, ціна — ${f.price} грн`)
+      .slice(0, 10)
       .join("\n");
 
-    // Формуємо system prompt
     const systemPrompt = `
 Ти — досвідчений флорист-консультант. Спілкуйся виключно українською мовою.
-Твоє завдання — допомогти клієнтам вибрати букет для різних ситуацій: день народження, побачення, 8 березня, вибачення, подяка, ювілей, випускний тощо.
-
-Відповідай тепло, емоційно, але коротко (1–3 речення). Використовуй приємні слова, надай поради, запитай про вік отримувача або бюджет, якщо це потрібно.
+Клієнт шукає букет для: ${session.target}
+Подія: ${session.occasion}
+Бюджет: ${session.budget} грн
 
 Ось квіти, які є в наявності:
 ${flowerList}
 
-Якщо клієнт хоче букет — пропонуй щось із цього списку.
+Запропонуй декілька варіантів букета. Відповідай коротко, тепло і приємно.
 `;
 
-    const response = await axios.post(
+    const aiResponse = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
         model: "openai/gpt-3.5-turbo",
         messages: [
-          {
-            role: "system",
-            content: systemPrompt,
-          },
-          {
-            role: "user",
-            content: message,
-          },
+          { role: "system", content: systemPrompt },
+          { role: "user", content: "Що ти можеш порадити?" },
         ],
       },
       {
@@ -64,10 +96,13 @@ ${flowerList}
       }
     );
 
-    res.json({ reply: response.data.choices[0].message.content });
+    return res.json({
+      sessionId,
+      reply: aiResponse.data.choices[0].message.content,
+    });
   } catch (error) {
     console.error("❌ Chat error:", error.message);
-    res.status(500).json({ error: "Chat error" });
+    return res.status(500).json({ error: "Помилка чату" });
   }
 });
 
