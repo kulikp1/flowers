@@ -15,7 +15,7 @@ const OrdersPage = () => {
       try {
         const response = await fetch(`${API_URL}/orders`);
         const data = await response.json();
-        setOrders(data.reverse()); // останні замовлення першими
+        setOrders(data.reverse());
       } catch (error) {
         console.error("Помилка при завантаженні замовлень:", error);
       } finally {
@@ -30,7 +30,7 @@ const OrdersPage = () => {
     items.reduce((total, item) => total + item.price * item.quantity, 0);
 
   const handlePay = (order) => {
-    navigate("/payment", { state: { order } }); // передаємо дані замовлення через state
+    navigate("/payment", { state: { order } });
   };
 
   return (
