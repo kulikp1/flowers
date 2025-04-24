@@ -38,7 +38,6 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
 }
 
-/* Хедер */
 .header {
   display: flex;
   justify-content: space-between;
@@ -72,7 +71,6 @@
   box-shadow: 0 6px 12px rgba(255, 105, 135, 0.2);
 }
 
-/* Повідомлення */
 .messages {
   flex: 1;
   padding: 16px 14px;
@@ -92,7 +90,6 @@
   background: transparent;
 }
 
-/* Повідомлення користувача */
 .user {
   align-self: flex-end;
   background: #ffe4ee;
@@ -104,7 +101,6 @@
   max-width: 80%;
 }
 
-/* Повідомлення бота */
 .bot {
   align-self: flex-start;
   background: #f0f0f0;
@@ -116,7 +112,6 @@
   max-width: 80%;
 }
 
-/* Поле вводу */
 .inputArea {
   display: flex;
   padding: 10px;
@@ -149,7 +144,6 @@
   background: #ff6f9e;
 }
 
-/* Спінер */
 .spinner {
   display: flex;
   justify-content: flex-start;
