@@ -6,7 +6,6 @@
   width: 340px;
 }
 
-/* Кнопка чату */
 .toggleButton {
   position: absolute;
   bottom: 0;
@@ -26,7 +25,6 @@
   transform: scale(1.1);
 }
 
-/* Вікно чату */
 .chatBox {
   position: relative;
   margin-bottom: 70px;
