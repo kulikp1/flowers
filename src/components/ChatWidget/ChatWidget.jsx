@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./ChatWidget.module.css";
 
 const ChatWidget = () => {
@@ -8,6 +8,8 @@ const ChatWidget = () => {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const sessionIdRef = useRef(null);
 
   const toggleChat = () => setIsOpen(!isOpen);
 
@@ -23,8 +25,15 @@ const ChatWidget = () => {
       const botResponse = await fetch("http://localhost:3001/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({
+          message: input,
+          sessionId: sessionIdRef.current,
+        }),
       }).then((res) => res.json());
+
+      if (botResponse.sessionId) {
+        sessionIdRef.current = botResponse.sessionId;
+      }
 
       setMessages((prev) => [
         ...prev,
@@ -47,6 +56,7 @@ const ChatWidget = () => {
 
   const handleClear = () => {
     setMessages([{ from: "bot", text: "Привіт! Я допоможу обрати букет 🌸" }]);
+    sessionIdRef.current = null;
   };
 
   return (
