@@ -1,104 +1,157 @@
-# 🌸 Flower Basket / Квітковий Кошик
+🌸 Flower Basket / Квітковий Кошик
+Flower Basket — це легкий, зручний у використанні React-застосунок для керування замовленнями квітів на оптовій базі. Призначений для клієнтів, що замовляють квіти оптом, і для адміністраторів, які обробляють ці замовлення.
 
-**Flower Basket** — це легкий, зручний у використанні React-застосунок для керування замовленнями квітів на оптовій базі. Призначений для клієнтів, що замовляють квіти оптом, і для адміністраторів, які обробляють ці замовлення.
-
----
-
-## 🔍 Огляд / Overview
-
+🔍 Огляд
 Цей застосунок ідеально підходить для малого бізнесу або демонстрації логіки e-commerce без бекенду. Всі дані зберігаються локально в LocalStorage, що робить його незалежним від серверної частини.
 
----
+🎯 Основні функції
+Для Клієнтів:
+🔎 Перегляд каталогу квітів з назвою, фото, ціною та доступною кількістю
+🛒 Додавання квітів у кошик, редагування кількості
+📦 Оформлення замовлень з вибором типу доставки (доставка / самовивіз)
+⏳ Відстеження статусу своїх замовлень
 
-## 🎯 Основні функції / Key Features
+Для Адміністраторів:
+🗂 Перегляд усіх замовлень клієнтів з деталями
+📝 Оновлення статусу (Очікує, Недостатньо товару, Виконано)
+🔔 Можливість сповіщати клієнта про зміни (імітація)
+📉 Управління залишками (імітовано через логіку LocalStorage)
 
-### Для Клієнтів:
+👥 Ролі користувачів
 
-🔎 Перегляд каталогу квітів з назвою, фото, ціною та доступною кількістю.  
-🛒 Додавання квітів у кошик, редагування кількості.  
-📦 Оформлення замовлень з вибором типу доставки (доставка / самовивіз).  
-⏳ Відстеження статусу своїх замовлень.
+Роль Можливості
+Клієнт Перегляд товарів, додавання в кошик, оформлення замовлень, перегляд статусу
+Адміністратор Управління замовленнями, оновлення статусів, часткова видача замовлень
+🧰 Технології
+⚛ React (v18+)
+💾 Local Storage для збереження даних
+📄 JSON-мок-дані замість бази даних
+🎨 CSS Modules — ізольоване стилювання
+⚙️ useState, useEffect — керування станом
 
-### Для Адміністраторів:
-
-🗂 Перегляд усіх замовлень клієнтів з деталями.  
-📝 Оновлення статусу (Очікує, Недостатньо товару, Виконано).  
-🔔 Можливість сповіщати клієнта про зміни (імітація).  
-📉 Управління залишками (імітовано через логіку LocalStorage).
-
----
-
-## 👥 Ролі користувачів / User Roles
-
-| Роль          | Можливості                                                                   |
-| ------------- | ---------------------------------------------------------------------------- |
-| Клієнт        | Перегляд товарів, додавання в кошик, оформлення замовлень, перегляд статусу. |
-| Адміністратор | Управління замовленнями, оновлення статусів, часткова видача замовлень.      |
-
----
-
-## 🧰 Технології / Tech Stack
-
-⚛ **React** (v18+)  
-💾 **Local Storage** для збереження даних  
-📄 **JSON-мок-дані** замість бази даних  
-🎨 **CSS Modules** — ізольоване стилювання  
-⚙️ **useState, useEffect** — керування станом
-
----
-
-## 📂 Структура проекту / Project Structure
-
-```
+📂 Структура проекту
+pgsql
+Копировать
+Редактировать
 flower-basket/
 ├── public/
 ├── src/
-│   ├── components/
-│   │   ├── ProductCard.jsx
-│   │   ├── Cart.jsx
-│   │   └── OrderStatus.jsx
-│   ├── pages/
-│   │   ├── Home.jsx
-│   │   ├── AdminPanel.jsx
-│   │   └── OrderHistory.jsx
-│   ├── data/
-│   │   └── flowers.json
-│   ├── utils/
-│   │   └── localStorageHelpers.js
-│   ├── App.jsx
-│   └── index.js
-```
+│ ├── components/
+│ │ ├── ProductCard.jsx
+│ │ ├── Cart.jsx
+│ │ └── OrderStatus.jsx
+│ ├── pages/
+│ │ ├── Home.jsx
+│ │ ├── AdminPanel.jsx
+│ │ └── OrderHistory.jsx
+│ ├── data/
+│ │ └── flowers.json
+│ ├── utils/
+│ │ └── localStorageHelpers.js
+│ ├── App.jsx
+│ └── index.js
+🚀 Як запустити
+Клонувати репозиторій:
 
----
+bash
+Копировать
+Редактировать
+git clone https://github.com/yourusername/flower-basket.git
+cd flower-basket
+Встановити залежності:
 
-## 🚀 Як запустити / Getting Started
+bash
+Копировать
+Редактировать
+npm install
+Запустити застосунок:
 
-1. **Клонувати репозиторій:**
+bash
+Копировать
+Редактировать
+npm start
+Відкрийте у браузері: http://localhost:3000
 
-   ```bash
-   git clone https://github.com/yourusername/flower-basket.git
-   cd flower-basket
-   ```
+📌 Обмеження
+❌ Немає бекенду або авторизації (адміністратор визначається вручну через інтерфейс)
 
-2. **Встановити залежності:**
+🔁 Застосунок демонстраційного типу, не призначений для реального продакшну
 
-   ```bash
-   npm install
-   ```
+🌸 Flower Basket
+Flower Basket is a lightweight, user-friendly React application for managing flower orders at a wholesale base. Designed for customers who order flowers in bulk and administrators who handle those orders.
 
-3. **Запустити застосунок:**
+🔍 Overview
+This app is ideal for small businesses or for demonstrating e-commerce logic without a backend. All data is stored locally in LocalStorage, making it backend-independent.
 
-   ```bash
-   npm start
-   ```
+🎯 Key Features
+For Customers:
+🔎 Browse flower catalog with name, photo, price, and available quantity
+🛒 Add flowers to cart, adjust quantity
+📦 Place orders with delivery method selection (delivery / pickup)
+⏳ Track the status of placed orders
 
-   Відкрийте у браузері: [http://localhost:3000](http://localhost:3000)
+For Admins:
+🗂 View all customer orders with details
+📝 Update order status (Pending, Insufficient Stock, Fulfilled)
+🔔 Notify customer about status changes (simulated)
+📉 Manage stock levels (simulated via LocalStorage logic)
 
----
+👥 User Roles
 
-## 📌 Обмеження / Limitations
+Role Capabilities
+Customer Browse products, add to cart, place orders, view status
+Administrator Manage orders, update statuses, partial fulfillment
+🧰 Tech Stack
+⚛ React (v18+)
+💾 Local Storage for data persistence
+📄 JSON mock data instead of a database
+🎨 CSS Modules — scoped styling
+⚙️ useState, useEffect — state management
 
-- ❌ Немає бекенду або авторизації (адміністратор визначається вручну через інтерфейс).
-- 🔁 Застосунок демонстраційного типу, не призначений для реального продакшну.
+📂 Project Structure
+pgsql
+Копировать
+Редактировать
+flower-basket/
+├── public/
+├── src/
+│ ├── components/
+│ │ ├── ProductCard.jsx
+│ │ ├── Cart.jsx
+│ │ └── OrderStatus.jsx
+│ ├── pages/
+│ │ ├── Home.jsx
+│ │ ├── AdminPanel.jsx
+│ │ └── OrderHistory.jsx
+│ ├── data/
+│ │ └── flowers.json
+│ ├── utils/
+│ │ └── localStorageHelpers.js
+│ ├── App.jsx
+│ └── index.js
+🚀 Getting Started
+Clone the repository:
 
----
+bash
+Копировать
+Редактировать
+git clone https://github.com/yourusername/flower-basket.git
+cd flower-basket
+Install dependencies:
+
+bash
+Копировать
+Редактировать
+npm install
+Start the application:
+
+bash
+Копировать
+Редактировать
+npm start
+Open in browser: http://localhost:3000
+
+📌 Limitations
+❌ No backend or authentication (admin is selected manually via interface)
+
+🔁 Demo-type app, not meant for production use
