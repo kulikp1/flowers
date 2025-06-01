@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CatalogPage.module.css";
 import Header from "../Navigation/Navigation";
-import CartModal from "../CartModal/CartModal";
 
 const Catalog = () => {
   const [flowers, setFlowers] = useState([]);
@@ -11,9 +10,8 @@ const Catalog = () => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
   });
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const API_URL = "https://6804fc41ca467c15be67df54.mockapi.io/flowers";
 
   useEffect(() => {
@@ -49,7 +47,6 @@ const Catalog = () => {
         return [...prevCart, { ...flower, quantity: 1 }];
       }
     });
-    setIsCartOpen(true);
   };
 
   const handleRemoveFromCart = (id) => {
@@ -62,10 +59,6 @@ const Catalog = () => {
         item.id === id ? { ...item, quantity: newQuantity } : item
       )
     );
-  };
-
-  const handleCloseCart = () => {
-    setIsCartOpen(false);
   };
 
   const handleOrder = async () => {
@@ -97,7 +90,6 @@ const Catalog = () => {
 
       setCart([]);
       localStorage.removeItem("cart");
-      setIsCartOpen(false);
       navigate("/orders");
     } catch (error) {
       console.error("Помилка при оформленні замовлення:", error);
@@ -106,7 +98,13 @@ const Catalog = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <Header />
+      <Header
+        cart={cart}
+        onRemove={handleRemoveFromCart}
+        onUpdateQuantity={handleUpdateQuantity}
+        onOrder={handleOrder}
+      />
+
       <div className={styles.container}>
         <h2 className={styles.title}>Каталог квітів</h2>
 
@@ -150,16 +148,6 @@ const Catalog = () => {
           </div>
         )}
       </div>
-
-      {isCartOpen && (
-        <CartModal
-          cart={cart}
-          onClose={handleCloseCart}
-          onRemove={handleRemoveFromCart}
-          onUpdateQuantity={handleUpdateQuantity}
-          onOrder={handleOrder}
-        />
-      )}
     </div>
   );
 };
