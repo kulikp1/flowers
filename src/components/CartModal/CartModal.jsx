@@ -99,25 +99,31 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
   };
 
   const CartItem = ({ item }) => {
-    const handleChange = (e) => {
-      const quantity = parseInt(e.target.value, 10);
-      if (!isNaN(quantity) && quantity >= 1) {
-        onUpdateQuantity(item.id, quantity);
+    const handleDecrease = () => {
+      if (item.quantity > 1) {
+        onUpdateQuantity(item.id, item.quantity - 1);
+      } else {
+        onRemove(item.id); // видаляємо, якщо кількість стане 0
       }
+    };
+
+    const handleIncrease = () => {
+      onUpdateQuantity(item.id, item.quantity + 1);
     };
 
     return (
       <li className={styles.cartItem}>
         <span className={styles.itemName}>{item.name}</span>
-        <input
-          type="number"
-          min="1"
-          value={item.quantity}
-          className={styles.quantityInput}
-          onChange={handleChange}
-        />
+        <div className={styles.quantityControls}>
+          <button onClick={handleDecrease} className={styles.qtyButton}>
+            −
+          </button>
+          <span className={styles.qtyDisplay}>{item.quantity}</span>
+          <button onClick={handleIncrease} className={styles.qtyButton}>
+            +
+          </button>
+        </div>
         <span>{item.price * item.quantity} грн</span>
-        <button onClick={() => onRemove(item.id)}>×</button>
       </li>
     );
   };

@@ -200,3 +200,37 @@
   border-color: #36d7b7;
   box-shadow: 0 0 0 3px rgba(54, 215, 183, 0.2);
 }
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qtyButton {
+  padding: 4px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qtyButton:hover {
+  background-color: #ddd;
+}
+
+.qtyDisplay {
+  min-width: 24px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: red;
+  cursor: pointer;
+}
