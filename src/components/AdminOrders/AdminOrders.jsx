@@ -81,7 +81,6 @@ const AdminOrders = () => {
                 </div>
               </div>
 
-              {/* Статус оплати */}
               <div className={styles.orderStatus}>
                 {order.status === "paid" ? (
                   <span className={styles.paid}>🟢 Сплачено</span>
