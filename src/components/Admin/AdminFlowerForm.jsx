@@ -101,9 +101,9 @@ const AdminFlowerForm = () => {
       toast.success("Квітку оновлено!");
       setIsModalOpen(false);
       fetchFlowers();
-      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       toast.error("Помилка при оновленні");
+      console.log(error);
     }
   };
 
