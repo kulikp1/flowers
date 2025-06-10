@@ -7,7 +7,7 @@ import styles from "./Navigation.module.css";
 import logo from "../../assets/logo.png";
 import CartModal from "../CartModal/CartModal";
 
-const Header = ({ cart, onRemove, onUpdateQuantity, onOrder }) => {
+const Header = ({ cart = [], onRemove, onUpdateQuantity, onOrder }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleCartClick = () => {
@@ -41,7 +41,7 @@ const Header = ({ cart, onRemove, onUpdateQuantity, onOrder }) => {
           >
             <ShoppingCart className={styles.cartIcon} />
             Кошик
-            {cart.length > 0 && (
+            {cart?.length > 0 && (
               <span className={styles.cartBadge}>
                 {cart.reduce((sum, item) => sum + item.quantity, 0)}
               </span>
