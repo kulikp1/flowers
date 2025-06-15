@@ -103,7 +103,7 @@ const CartModal = ({ cart, onClose, onRemove, onUpdateQuantity, onOrder }) => {
       if (item.quantity > 1) {
         onUpdateQuantity(item.id, item.quantity - 1);
       } else {
-        onRemove(item.id); // видаляємо, якщо кількість стане 0
+        onRemove(item.id);
       }
     };
 
