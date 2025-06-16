@@ -39,9 +39,9 @@ const ChatWidget = () => {
         ...prev,
         { from: "bot", text: botResponse.reply },
       ]);
-      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setMessages((prev) => [
+        console.log(error),
         ...prev,
         { from: "bot", text: "Вибач, щось пішло не так 😢" },
       ]);
