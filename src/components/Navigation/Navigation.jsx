@@ -55,7 +55,7 @@ const Header = ({ cart = [], onRemove, onUpdateQuantity, onOrder }) => {
           onRemove={onRemove}
           onUpdateQuantity={onUpdateQuantity}
           onOrder={() => {
-            onOrder(); // обнуляє кошик або повідомляє про успішне замовлення
+            onOrder();
             handleCloseModal(); // закриває модалку
           }}
         />
