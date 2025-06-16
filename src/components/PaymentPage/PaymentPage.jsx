@@ -59,7 +59,7 @@ export default function PaymentPage() {
         <div className={styles.card}>
           {submitted ? (
             <div className={styles.successMessage}>
-              ✅ Оплата пройшла успішно! Переадресація...
+              Oплата пройшла успішно! Переадресація...
             </div>
           ) : (
             <form onSubmit={handlePayment} className={styles.form}>
