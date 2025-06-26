@@ -12,7 +12,16 @@ const OrdersPage = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      
+      try {
+        const response = await fetch(`${API_URL}/orders`);
+        const data = await response.json();
+        setOrders(data.reverse());
+      } catch (error) {
+        console.error("Помилка при завантаженні замовлень:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
     fetchOrders();
   }, []);
