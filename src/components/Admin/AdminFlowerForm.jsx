@@ -87,7 +87,26 @@ const AdminFlowerForm = () => {
     }));
   };
 
-  
+  const handleEditSubmit = async () => {
+    try {
+      await axios.put(
+        `https://6804fc41ca467c15be67df54.mockapi.io/flowers/${editData.id}`,
+        {
+          ...editData,
+          price: Number(editData.price),
+          oldPrice: Number(editData.oldPrice),
+          quantity: Number(editData.quantity),
+        }
+      );
+      toast.success("Квітку оновлено!");
+      setIsModalOpen(false);
+      fetchFlowers();
+    } catch (error) {
+      toast.error("Помилка при оновленні");
+      console.log(error);
+    }
+  };
+
   const handleDelete = async () => {
     if (!editData) return;
 
