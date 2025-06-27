@@ -10,7 +10,11 @@
   transform: scale(1.005);
 }
 
-
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
 
 .inputGroup label {
   font-weight: 600;
