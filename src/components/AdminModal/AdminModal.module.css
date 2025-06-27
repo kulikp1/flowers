@@ -71,6 +71,9 @@
   color: #5a2a27;
 }
 
+.deleteButton:hover {
+  background: linear-gradient(to right, #ff9e9e, #ff8686);
+}
 
 .modal {
   background: linear-gradient(145deg, #ffffff, #f7f7f7);
