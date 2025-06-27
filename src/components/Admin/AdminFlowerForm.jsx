@@ -148,27 +148,7 @@ const AdminFlowerForm = () => {
           ))}
         </div>
 
-        <div className={styles.rightPanel}>
-          <h2 className={styles.title}>Додати нову квітку</h2>
-          <form onSubmit={handleSubmit} className={styles.formCard}>
-            {[
-              { label: "Назва квітки", name: "name", type: "text" },
-              { label: "Ціна", name: "price", type: "number" },
-              { label: "Стара ціна", name: "oldPrice", type: "number" },
-              { label: "Кількість", name: "quantity", type: "number" },
-              { label: "URL зображення", name: "image", type: "url" },
-            ].map(({ label, name, type }) => (
-              <div key={name} className={styles.inputGroup}>
-                <label>{label}</label>
-                <input
-                  type={type}
-                  name={name}
-                  value={formData[name]}
-                  onChange={handleChange}
-                  required={name !== "oldPrice"}
-                  className={styles.input}
-                />
-              </div>
+        
             ))}
             <button type="submit" className={styles.button}>
               Додати квітку
